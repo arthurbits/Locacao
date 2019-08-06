@@ -9,7 +9,7 @@ public class Conexao {
     public static Connection getConexao()throws ClassNotFoundException,SQLException{  
         
         Class.forName("org.postgresql.Driver");
-        Connection conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Locacao","postgres","postgres");
+        Connection conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5434/Locacao","postgres","postgres");
       
     return conexao;
     }

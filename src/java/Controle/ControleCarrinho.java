@@ -1,16 +1,14 @@
 
 package Controle;
 
+import Bll.BllCarrinho;
 import Modelo.CarrinhoDeCompra;
-import Modelo.Cliente;
 import Modelo.Endereco;
 import Modelo.ItemDeCompra;
 import Modelo.Produto;
 import Modelo.Usuario;
-import ModeloDao.LocacaoDao;
 import ModeloDao.ProdutoDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,81 +33,24 @@ public class ControleCarrinho extends HttpServlet {
         try {
             String acao = request.getParameter("acao");             
             HttpSession sessao = request.getSession(); 
-            Usuario usuario = (Usuario)sessao.getAttribute("usuario");
-            Cliente cliente = (Cliente) sessao.getAttribute("cliente");
+            Usuario usuario = (Usuario)sessao.getAttribute("usuario");            
             Endereco endereco = (Endereco) sessao.getAttribute("endereco");
             CarrinhoDeCompra carrinho = (CarrinhoDeCompra) sessao.getAttribute("carrinho");
-            LocacaoDao ldao = new LocacaoDao();
+            BllCarrinho bll = new BllCarrinho();
             
-            if(acao.equals("FinalizaLocacao")){ 
-                
-                if (carrinho.getItens()==null | carrinho.getItens().size()==0){
-                    String msg = " Carrinho vazio !!";
-                    sessao.setAttribute("msg", msg);
-                    response.sendRedirect("index.jsp");
-                }else if(usuario == null){ 
-                        System.out.println("Usuario também é nulo ");
-                        String usuarioMsg = " Para Finalizar a locação é necessário entrar na conta !";
-                        sessao.setAttribute("usuarioMsg", usuarioMsg);
-                        response.sendRedirect("cadastro.jsp");
-                }else if ( endereco==null | endereco.getIdEndereco() == 0 ){
-                    System.out.println("Vai ir para o lobby !");
-                    String msg = " Cadastre seu endereço para entrega  ";
-                    sessao.setAttribute("msg", msg);
-                    response.sendRedirect("ControleCliente?acao=ChecarCliente");
-                }else{
-                    response.sendRedirect("finalizarLocacao.jsp");
-                }
-            } 
-           
-            
+            if(acao.equals("FinalizaLocacao")){              
+                response.sendRedirect( bll.FinalizarLocacao(carrinho, usuario, endereco)  );                
+            }          
             if(acao.equals("VerificaCarrinho")){
-                if(carrinho==null){       
-                    response.sendRedirect("carrinhoVazio.jsp");
-                }else{
-                    response.sendRedirect("carrinho.jsp");
-                }
-            }           
-            
-            
+                response.sendRedirect(bll.VerrificarCarrinho(carrinho));
+            }          
             if (acao.equals("addProduto")) {
                 //recupera o id do produto que deve ser add no carrinho
                 int idProduto = Integer.parseInt(request.getParameter("idProduto"));
-                
-                //flag para controle de inserção de novos produtos no carrinho
-                boolean existe = false;        
-                
-                //verifica se já exista um carrinho na sessao
-                if (carrinho == null) {                                                                                       
-                    carrinho = new CarrinhoDeCompra();
-                    sessao.setAttribute("carrinho",carrinho);                    
-                }
-                
-                // verifica se o produto existe no carrinho e se existe aumenta +1
-                if (carrinho.getItens()!=null){
-                    for(ItemDeCompra item : carrinho.getItens()){
-                        if(item.getProduto().getIdProduto()==idProduto){
-                            //incrementa a quantidade
-                            item.setQuantidade(item.getQuantidade()+1);
-                            existe = true;
-                        }                    
-                    }
-                }
-                
-                //Se não existe o item ou produto se cria um novo
-                if(existe==false){
-                    //encontra o produto no banco
-                    Produto produto = new ProdutoDao().listarPorId(idProduto);
-                    //cria um novo item
-                    ItemDeCompra novoItem = new ItemDeCompra();
-                    novoItem.setProduto(produto);
-                    novoItem.setQuantidade(1);
-                    //adiciona novo item
-                    carrinho.addNovoItem(novoItem);                
-                }               
+                //Renova o carrinho da sessão
+                sessao.setAttribute("carrinho", bll.AddProduto(carrinho, idProduto));
                 //carrega a pagina do carrinho de compras
-                request.getRequestDispatcher("/carrinho.jsp").forward(request, response);
-                
+                request.getRequestDispatcher("/carrinho.jsp").forward(request, response);         
                 
             }//fim addProduto       
             
@@ -160,26 +101,42 @@ public class ControleCarrinho extends HttpServlet {
                 //response.sendRedirect("carrinho.jsp");
             }//fim diminuiProduto
             
-            if (acao.equals("removeProduto")) {       
-                
-                //recupera um carrinho de produtos da sessão
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // ALTERAR PARA APÓS REMOVER , VERIFICAR SE POSSUI ITENS NO CARRINHO E CASO NÃO 
+            // MOVER PARA CARRINHOVAZIO.JSP OU INDEX.JSP
+            
+            if (acao.equals("removeProduto")) {     
                 //recupera o id do produto
                 int idProduto = Integer.parseInt(request.getParameter("idProduto"));
                 ItemDeCompra itemRemove = new ItemDeCompra();
                 Produto prodRemove = new Produto();
                 prodRemove.setIdProduto(idProduto);
                 itemRemove.setProduto(prodRemove);
-                carrinho.removerItem(itemRemove); 
-                
+                carrinho.removerItem(itemRemove);                 
                 sessao.setAttribute("carrinho", carrinho);
                 //carrega a pagina do carrinho de compras
-                request.getRequestDispatcher("/carrinho.jsp").forward(request, response);
-                
-                
-               // response.sendRedirect("carrinho.jsp");
-                
-                
-            } if (acao.equals("cancelaCompra")) {               
+                request.getRequestDispatcher("/carrinho.jsp").forward(request, response);       
+            } 
+            
+            
+            
+            
+            
+            
+            
+            
+            if (acao.equals("cancelaCompra")) {               
                 //recebe o usuario da sessao e revalida a mesma     
                 
                 //remove o carrinho da sessão
@@ -189,6 +146,8 @@ public class ControleCarrinho extends HttpServlet {
                 //redireciona para pagina principal
                 response.sendRedirect("index.jsp");
             }
+            
+            
         } catch (Exception erro) {
             request.setAttribute("erro", erro);
             request.getRequestDispatcher("/erro.jsp").forward(request, response);

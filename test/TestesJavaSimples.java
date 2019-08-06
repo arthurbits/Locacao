@@ -22,21 +22,22 @@ import java.util.GregorianCalendar;
  
 public class TestesJavaSimples{
  
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, ParseException {     
-       LocacaoDao ldao = new LocacaoDao();
-       Cliente c = new Cliente();
-       c.setIdCliente(1);
-       String dataf = "2019-06-20";
-       SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
-       Date data = formato.parse(dataf);
-       java.sql.Date dataSql = new java.sql.Date(data.getTime());
-       Locacao l = ldao.localizarLocacao(dataSql, c);
+    public static void main(String[] args)  {    
+        /*
+                LocacaoDao ldao = new LocacaoDao();
+                Cliente c = new Cliente();
+                c.setIdCliente(1);
+                String dataf = "2019-06-20";
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+                Date data = formato.parse(dataf);
+                java.sql.Date dataSql = new java.sql.Date(data.getTime());
+                Locacao l = ldao.localizarLocacao(dataSql, c);
+
+                 System.out.println("Data Inicial = "+l.getDataInicial());
+                 System.out.println("Data Final   = "+l.getDataFinal());
+        */
        
-        System.out.println("Data Inicial = "+l.getDataInicial());
-        System.out.println("Data Final   = "+l.getDataFinal());
-       
-       
-       
+      
        
        
        
