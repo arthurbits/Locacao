@@ -1,0 +1,144 @@
+
+package Controle;
+
+import Modelo.Cliente;
+import Modelo.Endereco;
+import Modelo.Usuario;
+import ModeloDao.ClienteDao;
+import ModeloDao.EnderecoDao;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "ControleCliente", urlPatterns = {"/ControleCliente"})
+public class ControleCliente extends HttpServlet {
+
+   
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ControleCliente</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ControleCliente at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+   
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            HttpSession session = request.getSession();
+            String acao = request.getParameter("acao");
+            ClienteDao cdao = new ClienteDao();
+        try{
+            if(acao.equals("ChecarCliente")){                             
+                Usuario usuairo = (Usuario)session.getAttribute("usuario");            
+                Cliente cliente = cdao.localizarIdUsuario(usuairo);                
+                session.setAttribute("cliente", cliente);
+                RequestDispatcher rd = request.getRequestDispatcher("ControleEndereco?acao=ChecarEndereco");
+                rd.forward(request,response);
+                
+            }
+            if(acao.equals("AddEndereco")){
+                System.out.println("Entrou no Add Endereco");
+                
+                Endereco endereco = (Endereco) session.getAttribute("endereco");
+                EnderecoDao edao = new EnderecoDao();
+                endereco = edao.localizarPorEndereco(endereco);           
+                
+                System.out.println("endereco id: "+endereco.getIdEndereco());
+                
+                Cliente cliente = (Cliente) session.getAttribute("cliente");
+                System.out.println("Nome : " + cliente.getNome());
+                
+                cliente.setEndereco(endereco);
+                
+                
+                cdao.addEndereco(cliente);
+                session.setAttribute("endereco", endereco);
+                session.setAttribute("cliente", cliente);
+                response.sendRedirect("lobby.jsp");
+            }
+            if(acao.equals("teste")){
+                
+                System.out.println("TESTE DEU Bom");
+            }
+            
+        }catch(Exception e){
+                request.setAttribute("erro",e);
+                RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
+                rd.forward(request,response);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            HttpSession session = request.getSession();
+            String acao = request.getParameter("acao");
+            ClienteDao cdao = new ClienteDao();
+        try{
+            if(acao.equals("Cadastrar")){  
+                System.out.println("Entrou no Cadastrar");
+                
+                Usuario usuario = (Usuario) session.getAttribute("usuario");
+                Cliente c = new Cliente();
+                
+                c.setNome(request.getParameter("nome"));
+                c.setRg(request.getParameter("rg"));
+                c.setCpf(request.getParameter("cpf"));
+                c.setTelefone(request.getParameter("telefone"));
+                c.setCelular(request.getParameter("celular"));
+                c.setUsuario(usuario);                             
+                cdao.cadastrar(c);
+                
+                String clienteMsg = " Dados cadastrados com sucesso !";
+                session.setAttribute("clienteMsg", clienteMsg); 
+                c = cdao.localizarIdUsuario(usuario);
+                session.setAttribute("cliente", c);
+                response.sendRedirect("lobby.jsp");
+              
+                
+            }
+            if(acao.equals("Salvar")){ 
+                System.out.println("Entrou no Salvar");
+                Cliente cliente = (Cliente)session.getAttribute("cliente");
+                Cliente c = new Cliente();
+                c.setIdCliente(cliente.getIdCliente());
+                c.setNome(request.getParameter("nome"));
+                c.setRg(request.getParameter("rg"));
+                c.setCpf(request.getParameter("cpf"));
+                c.setTelefone(request.getParameter("telefone"));
+                c.setCelular(request.getParameter("celular"));
+                cdao.atualizar(c);
+                
+                
+                session.setAttribute("cliente", c);
+                String clienteMsg = " Dados alterados com sucesso !";
+                session.setAttribute("clienteMsg", clienteMsg);
+                response.sendRedirect("lobby.jsp");
+            }
+            
+        }catch(Exception e){
+                request.setAttribute("erro",e);
+                RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
+                rd.forward(request,response);
+        }
+    }
+
+   
+}
