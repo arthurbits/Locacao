@@ -41,9 +41,9 @@
 </head><!--/head-->
 
 <body>
-	<!--
-		Barra Superior Login
-	-->
+    <!--
+            Barra Superior Login
+    -->
         <header id="header"><!--header-->
 		
             <div class="header-middle"><!--header-middle-->
@@ -124,13 +124,13 @@
                     </div>
 		</div>
 	</header>
-	<!--        
+    <!--        
             Barra Superior Login / FIM       
-	-->
+    -->
 	
-	<!--
-		CARRINHO
-	-->
+    <!--
+        CARRINHO
+    -->
 	          
         <section id="cart_items">
             <div class="container">
@@ -187,13 +187,13 @@
 	</section> <!--/#cart_items-->        
         
         
-	<!--
-		CARRINHO FIM
-	-->
+    <!--
+        CARRINHO FIM
+    -->
 	
-	<!--
-		OPÇÕES
-	-->	
+    <!--
+            OPÇÕES
+    -->	
             <section id="do_action">
 		<div class="container">
 			<div class="heading">
@@ -221,13 +221,13 @@
 			</div>
 		</div>
 	</section>
-	<!--
-		OPÇÕES
-	-->
+    <!--
+            OPÇÕES
+    -->
 	
-	<!--	
-	 RODAPÉ	
-	-->	
+    <!--	
+     RODAPÉ	
+    -->	
             <footer id="footer">		
                 <div class="footer-widget">
                     <div class="container">
@@ -251,9 +251,9 @@
                 </div>
 
             </footer>	
-	<!--	
-	 RODAPÉ FIM	
-	-->
+    <!--	
+     RODAPÉ FIM	
+    -->
 	
 	
 	

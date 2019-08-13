@@ -3,11 +3,6 @@ package Controle;
 
 import Bll.BllCarrinho;
 import Modelo.CarrinhoDeCompra;
-import Modelo.Endereco;
-import Modelo.ItemDeCompra;
-import Modelo.Produto;
-import Modelo.Usuario;
-import ModeloDao.ProdutoDao;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,118 +27,45 @@ public class ControleCarrinho extends HttpServlet {
             throws ServletException, IOException {
         try {
             String acao = request.getParameter("acao");             
-            HttpSession sessao = request.getSession(); 
-            Usuario usuario = (Usuario)sessao.getAttribute("usuario");            
-            Endereco endereco = (Endereco) sessao.getAttribute("endereco");
+            HttpSession sessao = request.getSession();      
             CarrinhoDeCompra carrinho = (CarrinhoDeCompra) sessao.getAttribute("carrinho");
             BllCarrinho bll = new BllCarrinho();
             
             if(acao.equals("FinalizaLocacao")){              
-                response.sendRedirect( bll.FinalizarLocacao(carrinho, usuario, endereco)  );                
-            }          
+                response.sendRedirect( bll.getPagina() );                
+            }    
+            
             if(acao.equals("VerificaCarrinho")){
-                response.sendRedirect(bll.VerrificarCarrinho(carrinho));
-            }          
+                bll.VerrificarCarrinho(carrinho);
+                response.sendRedirect(bll.getPagina());
+            }
+            
             if (acao.equals("addProduto")) {
-                //recupera o id do produto que deve ser add no carrinho
-                int idProduto = Integer.parseInt(request.getParameter("idProduto"));
-                //Renova o carrinho da sessão
-                sessao.setAttribute("carrinho", bll.AddProduto(carrinho, idProduto));
-                //carrega a pagina do carrinho de compras
-                request.getRequestDispatcher("/carrinho.jsp").forward(request, response);         
-                
-            }//fim addProduto       
-            
-            
-            
-                       
-            if (acao.equals("diminuiProduto")) {
-                //recupera o id do produto que deve ser add no carrinho
-                int idProduto = Integer.parseInt(request.getParameter("idProduto"));
-                //flag para controle de inserção de novos produtos no carrinho
-                boolean existe = false;
-                //recupera a sessão pertencente ao request
-                sessao = request.getSession();         
-                
-                //recupera um carrinho de produtos da sessão
-                //se não exite um carrinho na sessão o valor será igual a null
-                
-                //verifica se já exista um carrinho na sessao
-                if (carrinho == null) {
-                    //cria um carrinho                                                                      
-                    carrinho = new CarrinhoDeCompra();
-                    sessao.setAttribute("carrinho",carrinho);
-                }
-                // verifica se o produto existe no carrinho
-                if (carrinho.getItens()!=null){
-                    for(ItemDeCompra item : carrinho.getItens()){
-                        if(item.getProduto().getIdProduto()==idProduto){
-                            //incrementa a quantidade
-                            item.setQuantidade(item.getQuantidade()-1);
-                            existe = true;
-                        }                    
-                    }
-                }
-                //Se não existe o item ou produto se cria um novo
-                if(existe==false){
-                    //encontra o produto no banco
-                    Produto produto = new ProdutoDao().listarPorId(idProduto);
-                    //cria um novo item
-                    ItemDeCompra novoItem = new ItemDeCompra();
-                    novoItem.setProduto(produto);
-                    novoItem.setQuantidade(1);
-                    //adiciona novo item
-                    carrinho.addNovoItem(novoItem);                
-                }
+               int idProduto = Integer.parseInt(request.getParameter("idProduto"));
+                carrinho = bll.AddProduto(carrinho, idProduto);
                 sessao.setAttribute("carrinho", carrinho);
-                //carrega a pagina do carrinho de compras
-                request.getRequestDispatcher("/carrinho.jsp").forward(request, response);                
-                //response.sendRedirect("carrinho.jsp");
-            }//fim diminuiProduto
+                response.sendRedirect("carrinho.jsp");      
+            }    
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // ALTERAR PARA APÓS REMOVER , VERIFICAR SE POSSUI ITENS NO CARRINHO E CASO NÃO 
-            // MOVER PARA CARRINHOVAZIO.JSP OU INDEX.JSP
-            
-            if (acao.equals("removeProduto")) {     
-                //recupera o id do produto
-                int idProduto = Integer.parseInt(request.getParameter("idProduto"));
-                ItemDeCompra itemRemove = new ItemDeCompra();
-                Produto prodRemove = new Produto();
-                prodRemove.setIdProduto(idProduto);
-                itemRemove.setProduto(prodRemove);
-                carrinho.removerItem(itemRemove);                 
+            if (acao.equals("diminuiProduto")) {              
+                int idProduto = Integer.parseInt(request.getParameter("idProduto"));       
+               carrinho = bll.DiminuiProduto(carrinho, idProduto);                
+                carrinho = bll.AtualizarCarrinho(carrinho,idProduto);
                 sessao.setAttribute("carrinho", carrinho);
-                //carrega a pagina do carrinho de compras
-                request.getRequestDispatcher("/carrinho.jsp").forward(request, response);       
+                bll.VerrificarCarrinho(carrinho);
+                response.sendRedirect(bll.getPagina()); 
+            }
+             
+            if (acao.equals("removeProduto")) {           
+                int idProduto = Integer.parseInt(request.getParameter("idProduto"));    
+                carrinho = bll.RemoveProduto(carrinho, idProduto);
+                sessao.setAttribute("carrinho",carrinho);             
+                bll.VerrificarCarrinho(carrinho);
+                response.sendRedirect(bll.getPagina());   
             } 
             
-            
-            
-            
-            
-            
-            
-            
-            if (acao.equals("cancelaCompra")) {               
-                //recebe o usuario da sessao e revalida a mesma     
-                
-                //remove o carrinho da sessão
-                sessao.removeAttribute("carrinho");
-                //remove mensagem de disponibilidade
-                sessao.removeAttribute("msgCheck");                
-                //redireciona para pagina principal
+            if (acao.equals("cancelaCompra")) {                                    
+               sessao.removeAttribute("carrinho");
                 response.sendRedirect("index.jsp");
             }
             

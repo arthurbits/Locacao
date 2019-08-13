@@ -78,13 +78,7 @@
                                         <h6><%=msg%> &nbsp &nbsp </h6>
                                     </div>
                                     
-                                    <div class="form-group">
-                                        <form action="ControleUsuario" method="post"  class="form-inline" autocomplete="on">
-                                            <div class="shop-menu clearfix pull-right">                                                                                                                                       
-                                                <a href="carrinho.jsp" class="fa fa-shopping-cart"> Carrinho</a>                                                                            
-                                            </div>
-                                        </form>
-                                    </div>
+                                    
 
                                     <div class="form-group">
                                         <div class="shop-menu clearfix pull-right">

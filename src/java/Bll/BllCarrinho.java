@@ -9,66 +9,95 @@ import java.sql.SQLException;
 
 public class BllCarrinho {
     
-    public String FinalizarLocacao(CarrinhoDeCompra carrinho , Usuario usuario, Endereco endereco){    
-        String send = "";
-        if (carrinho.getItens()==null | carrinho.getItens().size()==0){                  
-                send = "carrinhoVazio.jsp";
-            }else if(usuario == null){              
-                    send="cadastro.jsp";
-            }else if ( endereco==null | endereco.getIdEndereco() == 0 ){                    
-                send="ControleCliente?acao=ChecarCliente";
-            }else{
-                send="finalizarLocacao.jsp";
-            }
-        return send;
-    }
+    private String pagina;
 
-    public String VerrificarCarrinho(CarrinhoDeCompra carrinho){
-        String send = "";
-        if(carrinho==null){       
-            send="carrinhoVazio.jsp";
-        }else{
-            send="carrinho.jsp";
-        }
-        return send;
+    public String getPagina() {
+        return pagina;
+    }    
+    
+    
+    public void FinalizarLocacao(CarrinhoDeCompra carrinho , Usuario usuario, Endereco endereco){          
+        if (carrinho.getItens()==null | carrinho.getItens().size()==0){                  
+                pagina= "carrinhoVazio.jsp";
+            }else if(usuario == null){              
+                    pagina="cadastro.jsp";
+            }else if ( endereco==null | endereco.getIdEndereco() == 0 ){                    
+                pagina="ControleCliente?acao=ChecarCliente";
+            }else{
+                pagina="finalizarLocacao.jsp";
+            }
     }
 
     public CarrinhoDeCompra AddProduto(CarrinhoDeCompra carrinho, int idProduto) throws SQLException, ClassNotFoundException{           
-                
-                //flag para controle de inserção de novos produtos no carrinho
-                boolean existe = false;        
-                
-                //verifica se já exista um carrinho na sessao
-                if (carrinho == null) {                                                                                       
+               boolean existe = false;        
+              if (carrinho == null) {                                                                                       
                     carrinho = new CarrinhoDeCompra();                                      
                 }
-                
-                // verifica se o produto existe no carrinho e se existe aumenta +1
                 if (carrinho.getItens()!=null){
-                    for(ItemDeCompra item : carrinho.getItens()){
-                        if(item.getProduto().getIdProduto()==idProduto){
-                            //incrementa a quantidade
-                            item.setQuantidade(item.getQuantidade()+1);
-                            existe = true;
-                        }                    
-                    }
+                        for(ItemDeCompra item : carrinho.getItens()){
+                                if(item.getProduto().getIdProduto()==idProduto){
+                                    //incrementa a quantidade
+                                    item.setQuantidade(item.getQuantidade()+1);
+                                    existe = true;
+                                }                    
+                        }
                 }
                 
-                //Se não existe o item ou produto se cria um novo
+               
                 if(existe==false){
-                    //encontra o produto no banco
                     Produto produto = new ProdutoDao().listarPorId(idProduto);
-                    //cria um novo item
                     ItemDeCompra novoItem = new ItemDeCompra();
                     novoItem.setProduto(produto);
                     novoItem.setQuantidade(1);
-                    //adiciona novo item
                     carrinho.addNovoItem(novoItem);                
-                }               
+                } 
+                
                 return carrinho;
             }          
                     
-                    
-                    
-                    
+    public CarrinhoDeCompra RemoveProduto(CarrinhoDeCompra carrinho , int idProduto){        
+        ItemDeCompra itemRemove = new ItemDeCompra();
+        for (ItemDeCompra item : carrinho.getItens()){
+            if (item.getProduto().getIdProduto() == idProduto){
+                itemRemove = item;                               
+            }            
+        }      
+        carrinho.removerItem(itemRemove);                 
+        return carrinho;
+    }
+    
+     public CarrinhoDeCompra DiminuiProduto(CarrinhoDeCompra carrinho, int idProduto) throws SQLException, ClassNotFoundException{
+        for(ItemDeCompra item : carrinho.getItens()){
+                    if(item.getProduto().getIdProduto()==idProduto){                     
+                        item.setQuantidade(item.getQuantidade()-1);
+                        System.out.println("  Diminui a quantidade do produto "+ item.getProduto().getNome());
+                    }                              
+        }                       
+         
+        return carrinho;
+    }  
+       
+    public void VerrificarCarrinho(CarrinhoDeCompra carrinho){   
+        System.out.println("   Entrou em Verificar carrinho  ");
+        pagina="carrinho.jsp";            
+         if (carrinho == null || carrinho.getItens().isEmpty()){
+           pagina="carrinhoVazio.jsp";
+        }         
+        System.out.println("Pagina = "+getPagina());
+    }
+    
+    public CarrinhoDeCompra AtualizarCarrinho(CarrinhoDeCompra carrinho, int idProduto){
+        System.out.println("Atualizando . . .");
+        CarrinhoDeCompra carro = carrinho;
+        for (ItemDeCompra item : carrinho.getItens()){
+            if(item.getProduto().getIdProduto()==idProduto && item.getQuantidade()<1){
+                carro = RemoveProduto(carrinho, idProduto);                
+            }
+            System.out.println("          Nome = "+item.getProduto().getNome());
+            System.out.println("Quantidade  = "+item.getQuantidade());
+        }
+        System.out.println("    Retornou Carrinho");
+        return carro;
+    }
+    
 }

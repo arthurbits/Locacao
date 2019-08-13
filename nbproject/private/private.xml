@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/Tcc/LocacaoVersao3.0/web/index.jsp</file>
             <file>file:/F:/Tcc/LocacaoVersao3.0/src/java/Controle/ControleCarrinho.java</file>
-            <file>file:/F:/Tcc/LocacaoVersao3.0/src/java/Util/Conexao.java</file>
-            <file>file:/F:/Tcc/LocacaoVersao3.0/web/carrinho.jsp</file>
+            <file>file:/F:/Tcc/LocacaoVersao3.0/web/carrinhoVazio.jsp</file>
             <file>file:/F:/Tcc/LocacaoVersao3.0/src/java/Bll/BllCarrinho.java</file>
         </group>
     </open-files>

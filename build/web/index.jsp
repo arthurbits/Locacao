@@ -52,9 +52,9 @@
             }           
 
         %>         
-	<!--
-		Barra Superior Login
-	-->        
+    <!--
+            Barra Superior Login
+    -->        
             <header id="header"><!--header-->
 		
             <div class="header-middle"><!--header-middle-->
@@ -146,18 +146,18 @@
                     </div>
 		</div>
 	</header>	      
-        <!--       
-            Barra Superior Login / FIM       
-	-->   
+    <!--       
+        Barra Superior Login / FIM       
+    -->   
         
         <section>
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="left-sidebar">
-                            <!--
-                                    CATEGORIA
-                            -->
+        <!--
+                CATEGORIA
+        -->
                                 <h2>Categoria</h2>
                                 <div class="panel-group category-products" id="accordian"><!--category-productsr-->
 
@@ -170,15 +170,15 @@
 
 
                                 </div>
-                            <!--
-                                CATEGORIA FIM
-                            -->
+        <!--
+            CATEGORIA FIM
+        -->
                     </div>
                 </div>
                 <div class="col-sm-9 padding-right">
-                        <!--	
-                                PRODUTOS
-                        -->
+        <!--	
+                PRODUTOS
+        -->
                         <%
                             // Recupera os produtos.
                             ArrayList<Produto> produtos = (ArrayList<Produto>) request.getAttribute("produtos");
@@ -214,16 +214,16 @@
                                    }//fim do for
                                 %>
                         </div>
-                        <!--		
-                            PRODUTOS FIM 
-                        -->	
+        <!--		
+            PRODUTOS FIM 
+        -->	
                 </div>
             </div>
         </div>
 	</section>
-	<!--	
-	 RODAPÉ	
-	-->	
+        <!--	
+         RODAPÉ	
+        -->	
             <footer id="footer">		
                 <div class="footer-widget">
                     <div class="container">
@@ -247,9 +247,9 @@
                 </div>
 
             </footer>	
-	<!--	
-	 RODAPÉ FIM	
-	-->
+        <!--	
+         RODAPÉ FIM	
+        -->
 	
 
   
