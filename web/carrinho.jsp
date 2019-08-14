@@ -164,7 +164,7 @@
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
                                     <a class="cart_quantity_up" href="ControleCarrinho?acao=addProduto&idProduto=<%=item.getProduto().getIdProduto()%>"> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="<%=item.getQuantidade()%>" autocomplete="off" size="2">
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="<%=item.getQuantidade()%>" readonly autocomplete="off" size="2">
                                     <a class="cart_quantity_down" href="ControleCarrinho?acao=diminuiProduto&idProduto=<%=item.getProduto().getIdProduto()%>"> - </a>
                                 </div>
                             </td>

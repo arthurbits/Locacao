@@ -66,7 +66,7 @@ public class BllCarrinho {
         return carrinho;
     }
     
-     public CarrinhoDeCompra DiminuiProduto(CarrinhoDeCompra carrinho, int idProduto) throws SQLException, ClassNotFoundException{
+    public CarrinhoDeCompra DiminuiProduto(CarrinhoDeCompra carrinho, int idProduto) throws SQLException, ClassNotFoundException{
         for(ItemDeCompra item : carrinho.getItens()){
                     if(item.getProduto().getIdProduto()==idProduto){                     
                         item.setQuantidade(item.getQuantidade()-1);
@@ -87,17 +87,20 @@ public class BllCarrinho {
     }
     
     public CarrinhoDeCompra AtualizarCarrinho(CarrinhoDeCompra carrinho, int idProduto){
-        System.out.println("Atualizando . . .");
-        CarrinhoDeCompra carro = carrinho;
+        System.out.println("Atualizando . . .");       
+        int x =0;
         for (ItemDeCompra item : carrinho.getItens()){
-            if(item.getProduto().getIdProduto()==idProduto && item.getQuantidade()<1){
-                carro = RemoveProduto(carrinho, idProduto);                
-            }
-            System.out.println("          Nome = "+item.getProduto().getNome());
-            System.out.println("Quantidade  = "+item.getQuantidade());
+            if(item.getProduto().getIdProduto()==idProduto){
+                if(item.getQuantidade()==0){
+                    x = item.getProduto().getIdProduto();
+                }
+            }            
+        }
+        if (x!=0){
+            RemoveProduto(carrinho, x);
         }
         System.out.println("    Retornou Carrinho");
-        return carro;
+        return carrinho;
     }
     
 }

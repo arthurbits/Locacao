@@ -48,9 +48,9 @@ public class ControleCarrinho extends HttpServlet {
             }    
             
             if (acao.equals("diminuiProduto")) {              
-                int idProduto = Integer.parseInt(request.getParameter("idProduto"));       
-               carrinho = bll.DiminuiProduto(carrinho, idProduto);                
-                carrinho = bll.AtualizarCarrinho(carrinho,idProduto);
+                int idProduto = Integer.parseInt(request.getParameter("idProduto"));  
+                carrinho  = bll.DiminuiProduto(carrinho, idProduto);                  
+                carrinho = bll.AtualizarCarrinho(carrinho,idProduto);                
                 sessao.setAttribute("carrinho", carrinho);
                 bll.VerrificarCarrinho(carrinho);
                 response.sendRedirect(bll.getPagina()); 
