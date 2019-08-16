@@ -1,8 +1,8 @@
 package Controle;
 
 
+import Bll.BllUsuario;
 import Modelo.Cliente;
-import Modelo.Email;
 import Modelo.Email;
 import Modelo.Endereco;
 import Modelo.Usuario;
@@ -10,13 +10,9 @@ import ModeloDao.ClienteDao;
 import ModeloDao.EnderecoDao;
 import ModeloDao.UsuarioDao;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,11 +23,8 @@ import javax.servlet.http.HttpSession;
 public class ControleUsuario extends HttpServlet {
 
    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ControleDeAcesso controle = new ControleDeAcesso();
-        HttpSession session = request.getSession();
         String acao = request.getParameter("acao");
         UsuarioDao udao = new UsuarioDao(); 
         try {
@@ -61,43 +54,24 @@ public class ControleUsuario extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ControleDeAcesso controle = new ControleDeAcesso();
+            throws ServletException, IOException {        
         HttpSession session = request.getSession();
         String acao = request.getParameter("acao");
-        UsuarioDao udao = new UsuarioDao();      
+        UsuarioDao udao = new UsuarioDao();    
+        BllUsuario bll = new BllUsuario();
         
         try{
-            if (acao.equals("Entrar")){
-                
-                String usuario = request.getParameter("usuario");
-                String senha = request.getParameter("senha");       
-                    
-                Usuario usuarioLogado = udao.logar(usuario, senha);    
-                boolean existe = udao.usuarioExiste(usuario, senha);
-                System.out.println("Pegou os valores e resposta pra Existe = "+existe);
-                if (existe==true){
-                    String page = controle.pagina(usuarioLogado);
-                    String msg = controle.mensagem(usuarioLogado); 
-                    ClienteDao cdao = new ClienteDao();
-                    Cliente cliente = cdao.localizarIdUsuario(usuarioLogado);
-                    EnderecoDao edao = new EnderecoDao();
-                    Endereco endereco = edao.localizarPorUsuario(usuarioLogado);
-                    session.setMaxInactiveInterval(-1);
-                    session.setAttribute("cliente", cliente);
-                    session.setAttribute("endereco", endereco);
-                    session.setAttribute("usuario", usuarioLogado);
-                    session.setAttribute("msg", msg);                 
-
-                    System.out.println("Adicionou usuario, mensagem e página à sessão .");                    
-                    response.sendRedirect(page);                              
-                }else {
-                    System.out.println("Usuario inválido ! ! ! ");
-                    String msg = "Usuario ou Senha inválidos.";
-                    session.setAttribute("msg", msg);
-                    response.sendRedirect("index.jsp"); 
-                }  
+            if (acao.equals("Entrar")){                 
+                String usuarioTxt = request.getParameter("usuario");
+                String senhaTxt = request.getParameter("senha");
+                Usuario usuarioLogado = udao.logar(usuarioTxt, senhaTxt);
+                String msg = bll.mensagem(usuarioTxt, senhaTxt);        
+                String page = bll.pagina(usuarioTxt, senhaTxt);               
+                session.setAttribute("usuario", usuarioLogado);
+                session.setAttribute("msg", msg); 
+                 response.sendRedirect(page);                              
             }
+            
             if(acao.equals("Cadastrar")){
                 Usuario usuario = new Usuario();
                 String usuariotxt = request.getParameter("usuario");
@@ -108,36 +82,19 @@ public class ControleUsuario extends HttpServlet {
                 usuario.setEmail(emailtxt);
                 usuario.setAtivo(false);                
                 usuario.setCredencial("Cliente");
-                String usuarioMsg ="";
-                
-                if (udao.emailExiste(usuario.getEmail())==true){
-                     usuarioMsg="E-mail existente, favor cadastrar com outro e-mail";                
-                                   
-                }else{                
-                    udao.cadastrar(usuario);
-                    usuario = udao.logar(usuariotxt, senhatxt);
-                    String em = usuario.getEmail();
-                    Email email = new Email();              
-                    email.enviaEmail(em);
-                    usuarioMsg = "Usuario cadastrado com sucesso. Um e-mail para ativação da conta foi enviado!";                 
-                }
+                String usuarioMsg =bll.Cadastrar(usuario);          
                 session.setAttribute("usuarioMsg", usuarioMsg);
                 response.sendRedirect("cadastro.jsp"); 
             }
             
-            if (acao.equals("Reenviar E-mail")){          
-           
+            if (acao.equals("Reenviar E-mail")){            
                 Usuario usuario =(Usuario) session.getAttribute("usuario");
                 Email email = new Email();   
                 String emailtxt = usuario.getEmail();
-                email.enviaEmail(emailtxt);     
-                
-                
+                email.enviaEmail(emailtxt);                  
                 String msg = "O email foi enviado com sucesso !";
                 session.setAttribute("msg", msg);
-                response.sendRedirect("index.jsp");  
-                
-                
+                response.sendRedirect("index.jsp");              
             }
             
             if (acao.equals("Alterar Senha ")){
@@ -145,9 +102,8 @@ public class ControleUsuario extends HttpServlet {
                 String senhaAtual = request.getParameter("senhaAtual");
                 String senhaNova = request.getParameter("senhaNova");
                 String usuario = request.getParameter("usuario");
-                String senhaMsg = "";       
-                
-                
+                String senhaMsg = "";                 
+                /*
                 Usuario uChecando =udao.logar(usuario, senhaAtual);
                 if(uChecando != null){
                     if (senhaAtual != senhaNova ){
@@ -169,6 +125,7 @@ public class ControleUsuario extends HttpServlet {
                 
                 
                 response.sendRedirect("alterarSenha.jsp");
+                */
             }
             
         }catch(Exception e){

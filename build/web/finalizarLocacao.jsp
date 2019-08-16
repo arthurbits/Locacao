@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col-md-12 clearfix">                            
                             
-                            <% if(usuario == null ){ %>
+                            <% if(usuario== null ){ %>
                                 <form action="ControleUsuario" class="form-inline"  method="post"  autocomplete="on">                                                   
                                     <div class="shop-menu clearfix pull-right">
                                         <ul class="nav navbar-nav">	

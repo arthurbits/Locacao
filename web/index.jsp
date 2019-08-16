@@ -1,3 +1,7 @@
+<%@page import="Modelo.Endereco"%>
+<%@page import="ModeloDao.EnderecoDao"%>
+<%@page import="Modelo.Cliente"%>
+<%@page import="ModeloDao.ClienteDao"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -39,30 +43,24 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head><!--/head-->
 
-<body>        
-        <%
-            String msg="";
-            msg = (String) session.getAttribute("msg");                            
-            Usuario usuario = (Usuario) session.getAttribute("usuario");            
-            
-            if(msg =="" | msg == null ){ 
-                if (usuario == null) {
-                    msg=" Bem vindo ";
-                }
-            }           
-
-        %>         
+<body>         
+        
+    <%
+        String msg = (String) session.getAttribute("msg");                            
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if(msg == null){ msg=" Bem vindo ";}
+    %>
     <!--
             Barra Superior Login
-    -->        
-            <header id="header"><!--header-->
+    -->
+        <header id="header"><!--header-->
 		
             <div class="header-middle"><!--header-middle-->
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 clearfix">                            
                             
-                            <% if(usuario == null ){ %>
+                            <% if(usuario == null || usuario.getUsuario() == null ){ %>
                                 <form action="ControleUsuario" class="form-inline"  method="post"  autocomplete="on">                                                   
                                     <div class="shop-menu clearfix pull-right">
                                         <ul class="nav navbar-nav">	
@@ -76,16 +74,12 @@
                                 </form>                   
                             <% }else if(usuario.getAtivo()==false){  %>
                                 <form action="ControleUsuario" class="form-inline"  method="post"  autocomplete="on">                                                   
-                                     <div class="form-inline" style="text-align:right ;">  
-                                        <div class="form-group">	
-                                            <h6><%=msg%></h6> 
-                                         </div>    
-                                        <div class="form-group">                                     
-                                           <input type="submit" class="btn btn-primary" name="acao" value="Reenviar E-mail">
-                                         </div>    
-                                        <div class="form-group">
-                                           <a href="sair.jsp" class="fa fa-power-off" >Sair</a>
-                                        </div>                                    
+                                    <div class="shop-menu clearfix pull-right">
+                                        <ul class="nav navbar-nav">	
+                                            <li><h6><%=msg%></h6></li>                                          
+                                            <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
+                                            <li><a href="sair.jsp" class="fa fa-power-off"> Sair </a><li>
+                                        </ul>                                    
                                     </div>                                      
                                 </form> 
                             
@@ -96,17 +90,11 @@
                                         <h6><%=msg%> &nbsp &nbsp </h6>
                                     </div>
                                     
-                                    <div class="form-group">
-                                        <form action="ControleUsuario" method="post"  class="form-inline" autocomplete="on">
-                                            <div class="shop-menu clearfix pull-right">                                                                                                                                       
-                                                <a href="ControleCarrinho?acao=VerificaCarrinho" class="fa fa-shopping-cart"> Carrinho</a>                                                                            
-                                            </div>
-                                        </form>
-                                    </div>
+                                    
 
                                     <div class="form-group">
                                         <div class="shop-menu clearfix pull-right">
-                                            <a href="ControleCliente?acao=ChecarCliente"  id="SuaConta" class="fa fa-home" >Sua Conta</a>
+                                            <a href="ControleCliente?acao=ChecarCliente"  class="fa fa-home">Sua Conta</a>
                                         </div>
                                     </div>
 
@@ -145,10 +133,10 @@
                         </div>
                     </div>
 		</div>
-	</header>	      
-    <!--       
+	</header>
+    <!--        
         Barra Superior Login / FIM       
-    -->   
+    --> 
         
         <section>
         <div class="container">

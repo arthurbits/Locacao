@@ -38,9 +38,9 @@
 </head><!--/head-->
 
 <body>
-	<!--
-		Barra Superior Login
-	-->
+    <!--
+            Barra Superior Login
+    -->
         <header id="header"><!--header-->
 		
             <div class="header-middle"><!--header-middle-->
@@ -122,9 +122,9 @@
                     </div>
 		</div>
 	</header>
-	<!--        
-            Barra Superior Login / FIM       
-	-->
+    <!--        
+        Barra Superior Login / FIM       
+    -->
 	
 	<!--
 		CARRINHO

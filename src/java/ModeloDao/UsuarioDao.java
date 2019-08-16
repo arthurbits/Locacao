@@ -8,17 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 
 public class UsuarioDao {
     private static final String ATUALIZAR = "update usuario set senha=? WHERE idUsuario=? ";
@@ -146,32 +136,24 @@ public class UsuarioDao {
        }
 }//FIM DELETE
     
-    public Usuario logar (String usuario,String senha)throws SQLException, ClassNotFoundException {
-        //conexão
+    public Usuario logar (String  usuario, String senha)throws SQLException, ClassNotFoundException {
         Connection conexao = null;
-        //Instancia de Array
-        Usuario usuarioLogado = new Usuario();
-        
-        try{
-            
+        Usuario usuarioLogado = new Usuario();        
+        try{            
             conexao = Conexao.getConexao();
             PreparedStatement pstmt = conexao.prepareStatement(LOGIN);
             pstmt.setString(1,usuario);
             pstmt.setString(2,senha);
             ResultSet rs = pstmt.executeQuery();
-        while (rs.next()){        //a cada loop
-                     
+        while (rs.next()){        //a cada loop                     
             usuarioLogado.setIdUsuario(rs.getInt("idUsuario"));
             usuarioLogado.setUsuario(rs.getString("usuario"));
             usuarioLogado.setSenha(rs.getString("senha"));
             usuarioLogado.setEmail(rs.getString("email"));            
             usuarioLogado.setAtivo(rs.getBoolean("ativo"));  
-            usuarioLogado.setCredencial(rs.getString("credencial"));
-           
-                  
+            usuarioLogado.setCredencial(rs.getString("credencial"));                  
         }
-       return usuarioLogado;
-            
+            return usuarioLogado;            
         }catch(Exception e ){
             throw new RuntimeException(e);
         }finally{
@@ -182,7 +164,7 @@ public class UsuarioDao {
             
                 }            
             } 
-    }//FIM BUSCARPORID
+    }
     
     public boolean emailExiste(String email)throws SQLException, ClassNotFoundException{
         boolean flag = false;
@@ -208,8 +190,8 @@ public class UsuarioDao {
         return flag;
         
     } //FIM EMAILEXISTE 
-    
-    public boolean usuarioExiste(String usuario,String senha)throws SQLException, ClassNotFoundException{
+  
+    public boolean usuarioExiste(String  usuario, String senha)throws SQLException, ClassNotFoundException{
         boolean flag = false;
         Connection conexao = null;
         try{
@@ -220,8 +202,8 @@ public class UsuarioDao {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()){
                flag = true;         
-            }            
-            
+            }  
+            return flag;
         }catch (Exception e ){           
            throw new RuntimeException(e);           
         }finally{           
@@ -230,10 +212,19 @@ public class UsuarioDao {
                throw new RuntimeException (ex);
            }
        }
-        
-        return flag;
-        
-    } //FIM EMAILEXISTE  
-   
+    }     
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

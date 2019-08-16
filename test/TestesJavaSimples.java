@@ -11,6 +11,7 @@ import Modelo.Locacao;
 import Modelo.Produto;
 import Modelo.Tipo;
 import ModeloDao.LocacaoDao;
+import ModeloDao.UsuarioDao;
 import Util.Conexao;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -22,7 +23,7 @@ import java.util.GregorianCalendar;
  
 public class TestesJavaSimples{
  
-    public static void main(String[] args)  {    
+    public static void main(String[] args) throws SQLException, ClassNotFoundException  {    
         /*
                 LocacaoDao ldao = new LocacaoDao();
                 Cliente c = new Cliente();
@@ -37,7 +38,12 @@ public class TestesJavaSimples{
                  System.out.println("Data Final   = "+l.getDataFinal());
         */
        
-      
+      UsuarioDao udao = new UsuarioDao();
+      boolean a  = udao.emailExiste("asd");
+        System.out.println("Email : "+a);
+        boolean b = udao.usuarioExiste("arthur", "123asd");
+        System.out.println("Usuario : "+b);
+        
        
        
        
