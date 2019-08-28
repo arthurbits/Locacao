@@ -3,6 +3,8 @@ package Controle;
 
 import Bll.BllCarrinho;
 import Modelo.CarrinhoDeCompra;
+import Modelo.Endereco;
+import Modelo.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,9 +32,12 @@ public class ControleCarrinho extends HttpServlet {
             HttpSession sessao = request.getSession();      
             CarrinhoDeCompra carrinho = (CarrinhoDeCompra) sessao.getAttribute("carrinho");
             BllCarrinho bll = new BllCarrinho();
+            Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+            Endereco endereco = (Endereco) sessao.getAttribute("endereco");
             
-            if(acao.equals("FinalizaLocacao")){              
-                response.sendRedirect( bll.getPagina() );                
+            if(acao.equals("FinalizaLocacao")){ 
+                bll.FinalizarLocacao(carrinho, usuario, endereco);
+                response.sendRedirect( bll.getPagina());                
             }    
             
             if(acao.equals("VerificaCarrinho")){

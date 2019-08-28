@@ -7,7 +7,12 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+/*
+    select distinct * from produto where idproduto <> 
+( select distinct i.idproduto from itemdecompra as i ,locacao as l
+     where i.idlocacaofk = l.idlocacao and l.datainicial between '2019-08-20' and '2019-08-21'										   
+     and datafinal between '2019-08-20' and '2019-08-21' ) order by idproduto;
+*/
 
 public class ProdutoDao {
     private static final String LISTAR = "select * from produto order by idproduto";

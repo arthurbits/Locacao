@@ -53,31 +53,17 @@ public class ControleCliente extends HttpServlet {
                 rd.forward(request,response);
                 
             }
-            if(acao.equals("AddEndereco")){
-                System.out.println("Entrou no Add Endereco");
-                
+            if(acao.equals("AddEndereco")){             
                 Endereco endereco = (Endereco) session.getAttribute("endereco");
                 EnderecoDao edao = new EnderecoDao();
-                endereco = edao.localizarPorEndereco(endereco);           
-                
-                System.out.println("endereco id: "+endereco.getIdEndereco());
-                
+                endereco = edao.localizarPorEndereco(endereco);          
                 Cliente cliente = (Cliente) session.getAttribute("cliente");
-                System.out.println("Nome : " + cliente.getNome());
-                
                 cliente.setEndereco(endereco);
-                
-                
                 cdao.addEndereco(cliente);
                 session.setAttribute("endereco", endereco);
                 session.setAttribute("cliente", cliente);
                 response.sendRedirect("lobby.jsp");
-            }
-            if(acao.equals("teste")){
-                
-                System.out.println("TESTE DEU Bom");
-            }
-            
+            }            
         }catch(Exception e){
                 request.setAttribute("erro",e);
                 RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
@@ -93,26 +79,20 @@ public class ControleCliente extends HttpServlet {
             ClienteDao cdao = new ClienteDao();
         try{
             if(acao.equals("Cadastrar")){  
-                System.out.println("Entrou no Cadastrar");
-                
                 Usuario usuario = (Usuario) session.getAttribute("usuario");
-                Cliente c = new Cliente();
-                
+                Cliente c = new Cliente();                
                 c.setNome(request.getParameter("nome"));
                 c.setRg(request.getParameter("rg"));
                 c.setCpf(request.getParameter("cpf"));
                 c.setTelefone(request.getParameter("telefone"));
                 c.setCelular(request.getParameter("celular"));
                 c.setUsuario(usuario);                             
-                cdao.cadastrar(c);
-                
+                cdao.cadastrar(c);                
                 String clienteMsg = " Dados cadastrados com sucesso !";
                 session.setAttribute("clienteMsg", clienteMsg); 
                 c = cdao.localizarIdUsuario(usuario);
                 session.setAttribute("cliente", c);
-                response.sendRedirect("lobby.jsp");
-              
-                
+                response.sendRedirect("lobby.jsp");          
             }
             if(acao.equals("Salvar")){ 
                 System.out.println("Entrou no Salvar");
@@ -124,9 +104,7 @@ public class ControleCliente extends HttpServlet {
                 c.setCpf(request.getParameter("cpf"));
                 c.setTelefone(request.getParameter("telefone"));
                 c.setCelular(request.getParameter("celular"));
-                cdao.atualizar(c);
-                
-                
+                cdao.atualizar(c);               
                 session.setAttribute("cliente", c);
                 String clienteMsg = " Dados alterados com sucesso !";
                 session.setAttribute("clienteMsg", clienteMsg);

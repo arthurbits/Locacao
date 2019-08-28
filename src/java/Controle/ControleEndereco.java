@@ -45,13 +45,11 @@ public class ControleEndereco extends HttpServlet {
         String acao = request.getParameter("acao");
         EnderecoDao edao = new EnderecoDao();
         try{
-            if(acao.equals("ChecarEndereco")){
-                System.out.println("Entrou na Controle Endereço");
+            if(acao.equals("ChecarEndereco")){                
                 Usuario usuario = (Usuario) session.getAttribute("usuario");              
                 Endereco endereco = edao.localizarPorUsuario(usuario);
                 session.setAttribute("endereco", endereco);                
-                response.sendRedirect("lobby.jsp");
-                
+                response.sendRedirect("lobby.jsp");                
             }
             
             
@@ -74,42 +72,29 @@ public class ControleEndereco extends HttpServlet {
             ClienteDao cdao = new ClienteDao(); 
         try{
             if(acao.equals("Cadastrar")){    
-                
-                System.out.println("Entrou Cadastro Endereco");                          
-                
                 Endereco e = new Endereco();
                 e.setLogradouro(request.getParameter("logradouro"));
                 e.setNumero(Integer.parseInt(request.getParameter("numero")));
                 e.setBairro(request.getParameter("bairro"));
                 e.setCidade(request.getParameter("cidade"));
                 e.setCep(Integer.parseInt(request.getParameter("cep")));
-                edao.cadastrar(e);        
-                
-                session.setAttribute("endereco", e);
-                
+                edao.cadastrar(e);                
+                session.setAttribute("endereco", e);                
                 String enderecoMsg = "Endereço cadastrado com sucesso ! ";
-                session.setAttribute("enderecoMsg", enderecoMsg);
-                
+                session.setAttribute("enderecoMsg", enderecoMsg);                
                 response.sendRedirect("ControleCliente?acao=AddEndereco");
-                
-                
-                
-                
+             
             }
-            if(acao.equals("Salvar")){                
-                System.out.println("Entrou Salvar Endereco");
+            if(acao.equals("Salvar")){         
                 Endereco e = new Endereco();
-                Endereco endereco = (Endereco) session.getAttribute("endereco");
-                
+                Endereco endereco = (Endereco) session.getAttribute("endereco");                
                 e.setIdEndereco(endereco.getIdEndereco());
                 e.setLogradouro(request.getParameter("logradouro"));
                 e.setNumero(Integer.parseInt(request.getParameter("numero")));
                 e.setBairro(request.getParameter("bairro"));
                 e.setCidade(request.getParameter("cidade"));
-                e.setCep(Integer.parseInt(request.getParameter("cep")));               
-                
-                edao.atualizar(e);
-                
+                e.setCep(Integer.parseInt(request.getParameter("cep")));                
+                edao.atualizar(e);                
                 session.setAttribute("endereco", e);
                 String enderecoMsg = "Endereço alterado com sucesso ! ";
                 session.setAttribute("enderecoMsg", enderecoMsg);

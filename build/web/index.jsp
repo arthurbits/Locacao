@@ -175,7 +175,7 @@
                             }
                         %>
                         <div class="features_items"><!--features_items-->
-                                <h2 class="title text-center">Itens para Locação </br>Valores por diária </h2>
+                                <h2 class="title text-center"></h2>
                                 <%                                      
                                     for(Produto produto : produtos){                                            
                                 %>

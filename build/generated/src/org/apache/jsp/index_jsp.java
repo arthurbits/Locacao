@@ -98,24 +98,19 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n");
       out.write("</head><!--/head-->\n");
       out.write("\n");
-      out.write("<body>        \n");
-      out.write("        ");
+      out.write("<body>         \n");
+      out.write("        \n");
+      out.write("    ");
 
-            String msg="";
-            msg = (String) session.getAttribute("msg");                            
-            Usuario usuario = (Usuario) session.getAttribute("usuario");               
-            if(msg =="" | msg == null ){ 
-                if (usuario.getUsuario() == null) {
-                    msg=" Bem vindo ";
-                }
-            }           
-
-        
-      out.write("         \n");
+        String msg = (String) session.getAttribute("msg");                            
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if(msg == null){ msg=" Bem vindo ";}
+    
+      out.write("\n");
       out.write("    <!--\n");
       out.write("            Barra Superior Login\n");
-      out.write("    -->        \n");
-      out.write("            <header id=\"header\"><!--header-->\n");
+      out.write("    -->\n");
+      out.write("        <header id=\"header\"><!--header-->\n");
       out.write("\t\t\n");
       out.write("            <div class=\"header-middle\"><!--header-middle-->\n");
       out.write("                <div class=\"container\">\n");
@@ -123,7 +118,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <div class=\"col-md-12 clearfix\">                            \n");
       out.write("                            \n");
       out.write("                            ");
- if(usuario == null ){ 
+ if(usuario == null || usuario.getUsuario() == null ){ 
       out.write("\n");
       out.write("                                <form action=\"ControleUsuario\" class=\"form-inline\"  method=\"post\"  autocomplete=\"on\">                                                   \n");
       out.write("                                    <div class=\"shop-menu clearfix pull-right\">\n");
@@ -142,18 +137,14 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
  }else if(usuario.getAtivo()==false){  
       out.write("\n");
       out.write("                                <form action=\"ControleUsuario\" class=\"form-inline\"  method=\"post\"  autocomplete=\"on\">                                                   \n");
-      out.write("                                     <div class=\"form-inline\" style=\"text-align:right ;\">  \n");
-      out.write("                                        <div class=\"form-group\">\t\n");
-      out.write("                                            <h6>");
+      out.write("                                    <div class=\"shop-menu clearfix pull-right\">\n");
+      out.write("                                        <ul class=\"nav navbar-nav\">\t\n");
+      out.write("                                            <li><h6>");
       out.print(msg);
-      out.write("</h6> \n");
-      out.write("                                         </div>    \n");
-      out.write("                                        <div class=\"form-group\">                                     \n");
-      out.write("                                           <input type=\"submit\" class=\"btn btn-primary\" name=\"acao\" value=\"Reenviar E-mail\">\n");
-      out.write("                                         </div>    \n");
-      out.write("                                        <div class=\"form-group\">\n");
-      out.write("                                           <a href=\"sair.jsp\" class=\"fa fa-power-off\" >Sair</a>\n");
-      out.write("                                        </div>                                    \n");
+      out.write("</h6></li>                                          \n");
+      out.write("                                            <li><input type=\"submit\" class=\"btn btn-primary\"  value=\"Reenviar E-mail de validação\"></li>   \n");
+      out.write("                                            <li><a href=\"sair.jsp\" class=\"fa fa-power-off\"> Sair </a><li>\n");
+      out.write("                                        </ul>                                    \n");
       out.write("                                    </div>                                      \n");
       out.write("                                </form> \n");
       out.write("                            \n");
@@ -168,17 +159,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write(" &nbsp &nbsp </h6>\n");
       out.write("                                    </div>\n");
       out.write("                                    \n");
-      out.write("                                    <div class=\"form-group\">\n");
-      out.write("                                        <form action=\"ControleUsuario\" method=\"post\"  class=\"form-inline\" autocomplete=\"on\">\n");
-      out.write("                                            <div class=\"shop-menu clearfix pull-right\">                                                                                                                                       \n");
-      out.write("                                                <a href=\"ControleCarrinho?acao=VerificaCarrinho\" class=\"fa fa-shopping-cart\"> Carrinho</a>                                                                            \n");
-      out.write("                                            </div>\n");
-      out.write("                                        </form>\n");
-      out.write("                                    </div>\n");
+      out.write("                                    \n");
       out.write("\n");
       out.write("                                    <div class=\"form-group\">\n");
       out.write("                                        <div class=\"shop-menu clearfix pull-right\">\n");
-      out.write("                                            <a href=\"ControleCliente?acao=ChecarCliente\"  id=\"SuaConta\" class=\"fa fa-home\" >Sua Conta</a>\n");
+      out.write("                                            <a href=\"ControleCliente?acao=ChecarCliente\"  class=\"fa fa-home\">Sua Conta</a>\n");
       out.write("                                        </div>\n");
       out.write("                                    </div>\n");
       out.write("\n");
@@ -219,10 +204,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("\t\t</div>\n");
-      out.write("\t</header>\t      \n");
-      out.write("    <!--       \n");
+      out.write("\t</header>\n");
+      out.write("    <!--        \n");
       out.write("        Barra Superior Login / FIM       \n");
-      out.write("    -->   \n");
+      out.write("    --> \n");
       out.write("        \n");
       out.write("        <section>\n");
       out.write("        <div class=\"container\">\n");
@@ -263,7 +248,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
                         
       out.write("\n");
       out.write("                        <div class=\"features_items\"><!--features_items-->\n");
-      out.write("                                <h2 class=\"title text-center\">Itens para Locação </br>Valores por diária </h2>\n");
+      out.write("                                <h2 class=\"title text-center\"></h2>\n");
       out.write("                                ");
                                       
                                     for(Produto produto : produtos){                                            

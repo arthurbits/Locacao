@@ -2,8 +2,8 @@
 package ModeloDao;
 
 import Modelo.CarrinhoDeCompra;
+import Modelo.Compra;
 import Modelo.ItemDeCompra;
-import Modelo.Locacao;
 import Modelo.Produto;
 import Util.Conexao;
 import java.sql.Connection;
@@ -15,15 +15,15 @@ import java.text.ParseException;
 
 
 public class ItemDeCompraDao {
-    private static final String CADASTRARITEM = "insert into itemdecompra (idproduto,quantidade,total,idlocacaofk) values (?,?,?,?)";
-    private static final String LOCALIZARCARRINHO = "select * from itemdecompra where idlocacaofk = ? ";  
+    private static final String CADASTRARITEM = "insert into itemdecompra (idproduto,quantidade,total,idcomprafk) values (?,?,?,?)";
+    private static final String LOCALIZARCARRINHO = "select * from itemdecompra where idcomprafk = ? ";  
     private static final String ATUALIZAR = "update compra set quantidade=?,total=? where iditemdecompra=? ";
     private static final String DATADISPONIVEL = " select l.idlocacao , l.datainicial , l.datafinal , i.iditemdecompra , i.idproduto from locacao as l , itemdecompra as i where i.idlocacaofk = l.idlocacao and ? between l.datainicial and l.datafinal and i.idproduto = ? ";
     
 
     
     
-    public void cadastrarItem(ItemDeCompra item, Locacao locacao){
+    public void cadastrarItem(ItemDeCompra item, Compra compra){
        Connection conexao = null;
        try{
             conexao = Conexao.getConexao();              
@@ -31,7 +31,7 @@ public class ItemDeCompraDao {
             pstmt.setInt( 1 , item.getProduto().getIdProduto());
             pstmt.setInt( 2 , item.getQuantidade());
             pstmt.setDouble( 3 , item.getTotal());
-            pstmt.setInt( 4 , locacao.getIdLocacao());            
+            pstmt.setInt( 4 , compra.getIdCompra());            
            
             pstmt.execute();
            
@@ -50,14 +50,14 @@ public class ItemDeCompraDao {
     }
    }//FIM CADASTRAR ITEM
     
-    public CarrinhoDeCompra localizarItens(Locacao locacao) throws SQLException, ClassNotFoundException{
+    public CarrinhoDeCompra localizarItens(Compra compra) throws SQLException, ClassNotFoundException{
         CarrinhoDeCompra carrinho = new CarrinhoDeCompra();
         ProdutoDao pdao = new ProdutoDao();        
         //conexão
        Connection conexao = Conexao.getConexao();
        //criar comando SQL
        PreparedStatement pstmt = conexao.prepareStatement(LOCALIZARCARRINHO);     
-        pstmt.setInt(1,locacao.getIdLocacao());
+        pstmt.setInt(1,compra.getIdCompra());
        //executa
        ResultSet rs = pstmt.executeQuery();     
       
@@ -91,31 +91,6 @@ public class ItemDeCompraDao {
        
    } //FIM ATUALIZAR
     
-    public boolean itemDisponivel (ItemDeCompra item, Date dataSql )throws SQLException, ClassNotFoundException{
-        boolean flag = false;
-        Connection conexao = null;
-        try{
-            conexao = Conexao.getConexao();
-            PreparedStatement pstmt = conexao.prepareStatement(DATADISPONIVEL);
-            pstmt.setDate(1, dataSql);
-            pstmt.setInt(2,item.getProduto().getIdProduto());
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()){
-               flag = true;         
-            }            
-            
-        }catch (Exception e ){           
-           throw new RuntimeException(e);           
-        }finally{           
-           try{conexao.close();           
-           }catch (SQLException ex){               
-               throw new RuntimeException (ex);
-           }
-       }
         
-        return flag;
-        
-    } //FIM DataDisponível
-    
 }
 

@@ -210,9 +210,9 @@
                                     </ul>
                                         <div class="row">
                                             				
-                                            <a class="btn btn-default update" href="ControleCarrinho?acao=cancelaCompra">Cancelar Locação</a>
-                                            <a class="btn btn-default update" href="index.jsp">Continuar Alugando</a>                                       
-                                            <a class="btn btn-default check_out" href="ControleCarrinho?acao=FinalizaLocacao">Finalizar Locação </a>							
+                                            <a class="btn btn-default update" href="ControleCarrinho?acao=cancelaCompra">Cancelar Compra</a>
+                                            <a class="btn btn-default update" href="index.jsp">Continuar Comprando</a>                                       
+                                            <a class="btn btn-default check_out" href="ControleCarrinho?acao=FinalizaLocacao">Finalizar Compra   </a>							
                                             
                                         </div>
 

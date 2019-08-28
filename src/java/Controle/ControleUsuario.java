@@ -58,6 +58,8 @@ public class ControleUsuario extends HttpServlet {
         HttpSession session = request.getSession();
         String acao = request.getParameter("acao");
         UsuarioDao udao = new UsuarioDao();    
+        EnderecoDao edao = new EnderecoDao();
+        ClienteDao cdao = new ClienteDao();
         BllUsuario bll = new BllUsuario();
         
         try{
@@ -66,7 +68,9 @@ public class ControleUsuario extends HttpServlet {
                 String senhaTxt = request.getParameter("senha");
                 Usuario usuarioLogado = udao.logar(usuarioTxt, senhaTxt);
                 String msg = bll.mensagem(usuarioTxt, senhaTxt);        
-                String page = bll.pagina(usuarioTxt, senhaTxt);               
+                String page = bll.pagina(usuarioTxt, senhaTxt);   
+                session.setAttribute("cliente", cdao.localizarIdUsuario(usuarioLogado));
+                session.setAttribute("endereco", edao.localizarPorUsuario(usuarioLogado));
                 session.setAttribute("usuario", usuarioLogado);
                 session.setAttribute("msg", msg); 
                  response.sendRedirect(page);                              
