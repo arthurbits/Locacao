@@ -2,14 +2,27 @@ package Modelo;
 public class Produto {    
     private int idProduto;
     private String nome;
+    private String descricao;
     private Categoria categoria;
     private double valorCompra;
-    private double valorLocacao;
-    private double valorDano;
+    private double valorVenda;
     private String imagem;
-    private boolean locado;
-    private boolean reservado;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }    
     
+    public double getValorVenda() {
+        return valorVenda;
+    }
+
+    public void setValorVenda(double valorVenda) {
+        this.valorVenda = valorVenda;
+    }
    
     public int getIdProduto() {
         return idProduto;
@@ -41,23 +54,7 @@ public class Produto {
 
     public void setValorCompra(double valorCompra) {
         this.valorCompra = valorCompra;
-    }
-
-    public double getValorLocacao() {
-        return valorLocacao;
-    }
-
-    public void setValorLocacao(double valorLocacao) {
-        this.valorLocacao = valorLocacao;
-    }
-
-    public double getValorDano() {
-        return valorDano;
-    }
-
-    public void setValorDano(double valorDano) {
-        this.valorDano = valorDano;
-    }
+    }   
 
     public String getImagem() {
         return imagem;
@@ -67,19 +64,5 @@ public class Produto {
         this.imagem = imagem;
     }
 
-    public boolean isLocado() {
-        return locado;
-    }
-
-    public void setLocado(boolean locado) {
-        this.locado = locado;
-    }
-
-    public boolean isReservado() {
-        return reservado;
-    }
-
-    public void setReservado(boolean reservado) {
-        this.reservado = reservado;
-    }
+    
 }

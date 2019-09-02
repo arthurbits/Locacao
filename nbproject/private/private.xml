@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/Tcc/LocacaoVersao3.0/src/java/ModeloDao/ItemDeCompraDao.java</file>
-            <file>file:/F:/Tcc/LocacaoVersao3.0/src/java/ModeloDao/CompraDao.java</file>
-            <file>file:/F:/Tcc/LocacaoVersao3.0/src/java/Modelo/Compra.java</file>
+            <file>file:/F:/Tcc/eCommerce%20v%201.0/src/java/Modelo/Produto.java</file>
+            <file>file:/F:/Tcc/eCommerce%20v%201.0/src/java/Controle/ControleCarrinho.java</file>
+            <file>file:/F:/Tcc/eCommerce%20v%201.0/web/infoProduto.jsp</file>
+            <file>file:/F:/Tcc/eCommerce%20v%201.0/src/java/Controle/ControleProduto.java</file>
+            <file>file:/F:/Tcc/eCommerce%20v%201.0/src/java/ModeloDao/ProdutoDao.java</file>
+            <file>file:/F:/Tcc/eCommerce%20v%201.0/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>

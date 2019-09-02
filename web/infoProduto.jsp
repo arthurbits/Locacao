@@ -49,6 +49,7 @@
         String msg = (String) session.getAttribute("msg");                            
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if(msg == null){ msg=" Bem vindo ";}
+         Produto produto = (Produto) session.getAttribute("produto");
     %>
     <!--
             Barra Superior Login
@@ -68,8 +69,7 @@
                                             <li><a href="cadastro.jsp"><i class="fa fa-lock"></i> Cadastre-se</a></li>
                                             <li><input type="text" name="usuario" placeholder="Usuário"></li>
                                             <li><input type="password" name="senha"  placeholder="Senha"></li>
-                                            <li><input type="submit" name="acao" id="fazerLogin" value="Entrar"></li> 
-                                            <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li>                          
+                                            <li><input type="submit" name="acao" id="fazerLogin" value="Entrar"></li>                        
                                         </ul>                                    
                                     </div>                                      
                                 </form>                   
@@ -80,7 +80,6 @@
                                             <li><h6><%=msg%></h6></li>                                          
                                             <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
                                             <li><a href="sair.jsp" class="fa fa-power-off"> Sair </a><li>
-                                            <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li> 
                                         </ul>                                    
                                     </div>                                      
                                 </form> 
@@ -100,16 +99,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">                                      
-                                        <div class="shop-menu clearfix pull-right">                                          
+                                    <div class="form-group">
+                                      
+                                        <div class="shop-menu clearfix pull-right">
+                                          
                                             <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
-                                        </div>                                       
-                                    </div> 
-                                    
-                                    <div class="form-group">                                      
-                                        <div class="shop-menu clearfix pull-right">                                          
-                                            <a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a>
-                                        </div>                                       
+                                        </div>
+                                       
                                     </div> 
 
                                 </div>                                                
@@ -142,75 +138,51 @@
     <!--        
         Barra Superior Login / FIM       
     --> 
-        
-        <section>
-        <div class="container">
-            <div class="row">
-        <!--
-            CATEGORIA
-        -->
-                <div class="col-sm-3">
-                    <div class="left-sidebar">        
-                                <h2>Categoria</h2>
-                                <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                                <h4 class="panel-title"><a href="index.jsp">Brinquedos</a></h4>
-                                        </div>
-                                    </div> 
-                                </div>        
-                    </div>
-                </div>
-        <!--
-            CATEGORIA FIM
-        -->
-                <div class="col-sm-9 padding-right">
         <!--	
-                PRODUTOS
+            PRODUTO
         -->
-                        <%
-                            // Recupera os produtos.
-                            ArrayList<Produto> produtos = (ArrayList<Produto>) request.getAttribute("produtos");
-                            if(produtos == null) {
-                                request.getRequestDispatcher("/ControleProduto?acao=listaProdutos").forward(request, response);
-                            }
-                        %>
-                        <div class="features_items"><!--features_items-->
-                                <h2 class="title text-center"></h2>
-                                <%                                      
-                                    for(Produto produto : produtos){                                            
-                                %>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                    <img   src="imagens/<%=produto.getImagem()%>" alt="<%=produto.getImagem()%>" />
-                                                    <h2>Valor : R$  <%=produto.getValorVenda()%></h2>
-                                                    <a href="#"  class="btn btn-default add-to-cart " <i class="fa-shopping-bag"></i><%=produto.getNome()%></a>                                                   
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</a>
-                                            </div>
-                                            <div class="product-overlay">
-                                                    <div class="overlay-content">
-                                                            <h2>Valor : R$  <%=produto.getValorVenda()%></h2>                                                            
-                                                            <a href="ControleCarrinho?acao=detalhesProduto&idProduto=<%=produto.getIdProduto()%>"  class="btn btn-default add-to-cart " <i class="fa-shopping-bag"></i><%=produto.getNome()%></a>                                                   
-                                                            <a href="ControleCarrinho?acao=addProduto&idProduto=<%=produto.getIdProduto()%>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</a>
-                                                    </div>
-                                            </div>
-                                            
-                                        </div>								
-                                    </div>
-                                </div>
-                                <%                                   
-                                   }//fim do for
-                                %>
+        <section>        
+        <div class="container">
+            <div class="row">             
+                <div class="col-sm-12 padding-right">        
+                    <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <div class="single_product_thumb">                                             
+                            <img src="imagens/<%= produto.getImagem() %>" alt="<%= produto.getImagem() %>" height="500px" width="500px"/>
+                            </div>
+                        </div>                    
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Dados do Produto-->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <!-- Valor do Produto-->
+                                <h4 style="color: #d9534f;" >R$<%=produto.getValorVenda() %></h4>
+                                <!-- Nome do Produto-->
+                                <h1><%=produto.getNome()%></h1>                         
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <p><%= produto.getDescricao() %></p>
+                            </div>
+
+                            <!-- Adicionar ao Carrinho  -->
+                            
+                            <form class="cart clearfix" method="post">                                 
+                                <a href="ControleCarrinho?acao=addProduto&idProduto=<%=produto.getIdProduto()%>" class="btn btn-outline-success" style=" font-size: 20pt;  "><i class="fa fa-shopping-cart fa-1x"></i>    Adicionar ao Carrinho</a>
+                            </form>
+
                         </div>
-        <!--		
-            PRODUTOS FIM 
-        -->	
+                    </div>
+                </div>        	
                 </div>
             </div>
         </div>
-	</section>
+        </section>
+        <!--		
+            PRODUTO FIM 
+        -->
+       
         <!--	
          RODAPÉ	
         -->	

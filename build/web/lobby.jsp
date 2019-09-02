@@ -55,51 +55,66 @@
         </div>
     
     
-	<!--
-		Barra Superior Login
-	-->
-                
-	<header id="header"><!--header-->
+    <!--
+            Barra Superior Login
+    -->
+        <header id="header"><!--header-->
 		
             <div class="header-middle"><!--header-middle-->
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 clearfix">                            
                             
-                            <% if(usuario== null){ %>
+                            <% if(usuario == null || usuario.getUsuario() == null ){ %>
                                 <form action="ControleUsuario" class="form-inline"  method="post"  autocomplete="on">                                                   
                                     <div class="shop-menu clearfix pull-right">
                                         <ul class="nav navbar-nav">	
-                                            <li><%=msg%></li>                 
+                                            <li><h6><%=msg%></h6></li>                 
                                             <li><a href="cadastro.jsp"><i class="fa fa-lock"></i> Cadastre-se</a></li>
                                             <li><input type="text" name="usuario" placeholder="Usuário"></li>
                                             <li><input type="password" name="senha"  placeholder="Senha"></li>
-                                            <li><input type="submit" name="acao"  value="Entrar"></li>                        
+                                            <li><input type="submit" name="acao" id="fazerLogin" value="Entrar"></li> 
+                                            <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li>                          
                                         </ul>                                    
                                     </div>                                      
                                 </form>                   
-                            <% }else{   %>     
+                            <% }else if(usuario.getAtivo()==false){  %>
+                                <form action="ControleUsuario" class="form-inline"  method="post"  autocomplete="on">                                                   
+                                    <div class="shop-menu clearfix pull-right">
+                                        <ul class="nav navbar-nav">	
+                                            <li><h6><%=msg%></h6></li>                                          
+                                            <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
+                                            <li><a href="sair.jsp" class="fa fa-power-off"> Sair </a><li>
+                                            <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li> 
+                                        </ul>                                    
+                                    </div>                                      
+                                </form> 
+                            
+                            <% }else{  %>    
                                 <div class="form-inline" style="text-align:right ;">  
                                        
                                     <div class="form-group">
                                         <h6><%=msg%> &nbsp &nbsp </h6>
                                     </div>
                                     
-                                    <div class="form-group">
-                                        <form action="ControleUsuario" method="post"  class="form-inline" autocomplete="on">
-                                            <div class="shop-menu clearfix pull-right">                                                                                                                                       
-                                                <a href="ControleCarrinho?acao=VerificaCarrinho" class="fa fa-shopping-cart"> Carrinho</a>                                                                            
-                                            </div>
-                                        </form>
-                                    </div>                                   
+                                    
 
                                     <div class="form-group">
-                                      
                                         <div class="shop-menu clearfix pull-right">
-                                          
-                                            <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
+                                            <a href="ControleCliente?acao=ChecarCliente"  class="fa fa-home">Sua Conta</a>
                                         </div>
-                                       
+                                    </div>
+
+                                    <div class="form-group">                                      
+                                        <div class="shop-menu clearfix pull-right">                                          
+                                            <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
+                                        </div>                                       
+                                    </div> 
+                                    
+                                    <div class="form-group">                                      
+                                        <div class="shop-menu clearfix pull-right">                                          
+                                            <a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a>
+                                        </div>                                       
                                     </div> 
 
                                 </div>                                                
@@ -129,10 +144,9 @@
                     </div>
 		</div>
 	</header>
-	
-        <!--       
-            Barra Superior Login / FIM
-        -->
+    <!--       
+        Barra Superior Login / FIM
+    -->
 
         
        
@@ -158,7 +172,7 @@
 
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                                <h4 class="panel-title"><a href="index.jsp">Continuar as Locações</a></h4>
+                                                <h4 class="panel-title"><a href="index.jsp">Continuar as Compras</a></h4>
                                         </div>
                                     </div>							
                                     

@@ -68,7 +68,8 @@
                                             <li><a href="cadastro.jsp"><i class="fa fa-lock"></i> Cadastre-se</a></li>
                                             <li><input type="text" name="usuario" placeholder="Usuário"></li>
                                             <li><input type="password" name="senha"  placeholder="Senha"></li>
-                                            <li><input type="submit" name="acao" id="fazerLogin" value="Entrar"></li>                        
+                                            <li><input type="submit" name="acao" id="fazerLogin" value="Entrar"></li> 
+                                            <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li>                          
                                         </ul>                                    
                                     </div>                                      
                                 </form>                   
@@ -79,6 +80,7 @@
                                             <li><h6><%=msg%></h6></li>                                          
                                             <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
                                             <li><a href="sair.jsp" class="fa fa-power-off"> Sair </a><li>
+                                            <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li> 
                                         </ul>                                    
                                     </div>                                      
                                 </form> 
@@ -98,13 +100,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                      
-                                        <div class="shop-menu clearfix pull-right">
-                                          
+                                    <div class="form-group">                                      
+                                        <div class="shop-menu clearfix pull-right">                                          
                                             <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
-                                        </div>
-                                       
+                                        </div>                                       
+                                    </div> 
+                                    
+                                    <div class="form-group">                                      
+                                        <div class="shop-menu clearfix pull-right">                                          
+                                            <a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a>
+                                        </div>                                       
                                     </div> 
 
                                 </div>                                                
@@ -141,28 +146,24 @@
         <section>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                    <div class="left-sidebar">
         <!--
-                CATEGORIA
+            CATEGORIA
         -->
+                <div class="col-sm-3">
+                    <div class="left-sidebar">        
                                 <h2>Categoria</h2>
                                 <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-
-
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                                 <h4 class="panel-title"><a href="index.jsp">Brinquedos</a></h4>
                                         </div>
-                                    </div>                     
-
-
-                                </div>
+                                    </div> 
+                                </div>        
+                    </div>
+                </div>
         <!--
             CATEGORIA FIM
         -->
-                    </div>
-                </div>
                 <div class="col-sm-9 padding-right">
         <!--	
                 PRODUTOS
@@ -183,18 +184,19 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                    <img  src="imagens/<%=produto.getImagem()%>" alt="<%=produto.getImagem()%>" />
-                                                    <h2>Valor : R$  <%=produto.getValorLocacao()%></h2>
-                                                    <p><%=produto.getNome()%></p>
+                                                    <img   src="imagens/<%=produto.getImagem()%>" alt="<%=produto.getImagem()%>" />
+                                                    <h2>Valor : R$  <%=produto.getValorVenda()%></h2>
+                                                    <a href="#"  class="btn btn-default add-to-cart " <i class="fa-shopping-bag"></i><%=produto.getNome()%></a>                                                   
                                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</a>
                                             </div>
                                             <div class="product-overlay">
                                                     <div class="overlay-content">
-                                                            <h2>Valor : R$  <%=produto.getValorLocacao()%></h2>
-                                                            <p><%=produto.getNome()%></p>
+                                                            <h2>Valor : R$  <%=produto.getValorVenda()%></h2>                                                            
+                                                            <a href="ControleCarrinho?acao=detalhesProduto&idProduto=<%=produto.getIdProduto()%>"  class="btn btn-default add-to-cart " <i class="fa-shopping-bag"></i><%=produto.getNome()%></a>                                                   
                                                             <a href="ControleCarrinho?acao=addProduto&idProduto=<%=produto.getIdProduto()%>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</a>
                                                     </div>
                                             </div>
+                                            
                                         </div>								
                                     </div>
                                 </div>

@@ -103,26 +103,7 @@
                 </div>
             </div><!--/header-middle-->
 	
-		<div class="header-bottom"><!--header-bottom-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-9">                              
-                                
-                                <div class="mainmenu pull-left">
-                                    <ul class="nav navbar-nav collapse navbar-collapse">
-                                        <li><a href="index.jsp" class="active">Principal</a></li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="search_box pull-right">
-                                    <input type="text" placeholder="Buscar"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-		</div>
+		
 	</header>
     <!--        
             Barra Superior Login / FIM       
@@ -153,13 +134,13 @@
                         <tbody>
                         <tr>
                             <td class="cart_product">
-                                <a href=""><img src="imagens/<%=item.getProduto().getImagem()%>" alt="<%=item.getProduto().getImagem()%>"></a>
+                                <a href=""><img src="imagens/<%=item.getProduto().getImagem()%>" alt="<%=item.getProduto().getImagem()%>" width="100px" height="100px" ></a>
                             </td>
                             <td class="cart_description">
                                 <h4><%=item.getProduto().getNome() %></h4>                                
                             </td>
                             <td class="cart_price">
-                                <p><%=item.getProduto().getValorLocacao() %></p>
+                                <p><%=item.getProduto().getValorVenda() %></p>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
@@ -195,31 +176,27 @@
             OPÇÕES
     -->	
             <section id="do_action">
-		<div class="container">
-			<div class="heading">
-				<h3>O que gostaria de fazer agora ?</h3>				
-			</div>
-			<div class="row">
+            <div class="container">			
+                    <div class="row">
                             <div class="col-sm-6">					
                             </div>
                             <div class="col-sm-6">
                                 <div class="total_area">
                                     <ul>							
                                         <li>Total<span> R$ <%=carrinho.calculaTotal() %></span></li>
-
                                     </ul>
                                         <div class="row">
                                             				
                                             <a class="btn btn-default update" href="ControleCarrinho?acao=cancelaCompra">Cancelar Compra</a>
                                             <a class="btn btn-default update" href="index.jsp">Continuar Comprando</a>                                       
-                                            <a class="btn btn-default check_out" href="ControleCarrinho?acao=FinalizaLocacao">Finalizar Compra   </a>							
+                                            <a class="btn btn-default check_out" href="ControleCarrinho?acao=finalizaCompra">Finalizar Compra   </a>							
                                             
                                         </div>
 
                                 </div>
                             </div>
-			</div>
-		</div>
+                    </div>
+            </div>
 	</section>
     <!--
             OPÇÕES

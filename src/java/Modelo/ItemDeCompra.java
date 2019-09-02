@@ -11,9 +11,8 @@ public class ItemDeCompra {
 
     public void setIdItemDeCompra(int idItemDeCompra) {
         this.idItemDeCompra = idItemDeCompra;
-    }    
+    }
     
-
     public Produto getProduto() {
         return produto;
     }
@@ -28,7 +27,7 @@ public class ItemDeCompra {
     
 
     public double getTotal() {
-        this.total = this.quantidade*this.produto.getValorLocacao();        
+        this.total = this.quantidade*this.produto.getValorVenda();        
         return total;
     }
 

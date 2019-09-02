@@ -1,8 +1,3 @@
-    <%-- 
-    Document   : finalizarLocacao
-    Created on : 24/05/2019, 07:36:54
-    Author     : PcLorD
---%>
 
 <%@page import="Modelo.ItemDeCompra"%>
 <%@page import="Modelo.Endereco"%>
@@ -48,9 +43,9 @@
 </head><!--/head-->
 
 <body>
-	<!--
-		Barra Superior Login
-	-->
+    <!--
+            Barra Superior Login
+    -->
         <header id="header"><!--header-->
 		
             <div class="header-middle"><!--header-middle-->
@@ -138,12 +133,12 @@
                     </div>
 		</div>
 	</header>
-	<!--        
+    <!--        
             Barra Superior Login / FIM       
-	-->
-	<!--
-            CLIENTE
-        -->
+    -->
+    <!--
+        CLIENTE
+    -->
         <section id="cart_items">
             
             <div class="container">
@@ -180,19 +175,19 @@
                 
             </div>			
         </section>
-        <!--
-            CLIENTE OFF
-        -->
+    <!--
+        CLIENTE OFF
+    -->
         
         
-        <!--				
-            CARRINHO
-        -->
+    <!--				
+        CARRINHO
+    -->
 				
        <section id="cart_items">
        <div class="container">	    
         <div class="review-payment">
-                <h2>Locações & Pagamento</h2>
+                <h2>Compras & Pagamento</h2>
         </div>
 
         <div class="table-responsive cart_info">
@@ -219,7 +214,7 @@
                                 <h4><%=item.getProduto().getNome() %></h4>                                
                             </td>
                             <td class="cart_price">
-                                <p><%=item.getProduto().getValorLocacao() %></p>
+                                <p><%=item.getProduto().getValorCompra() %></p>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
@@ -245,13 +240,13 @@
         </div>
        </div>   
        </section>	
-        <!--				
-            CARRINHO				
-        -->
+    <!--				
+        CARRINHO				
+    -->
 			
-        <!--    
-            OPÇÕES
-	-->
+    <!--    
+        OPÇÕES
+    -->
 	
 	<section id="do_action">
             <div class="container">			
@@ -259,20 +254,10 @@
                     <div class="col-sm-6">					
                     </div>
                     <div class="col-sm-6">
-                        <form action="ControleLocacao" method="post">
+                        <form action="ControleCompra" method="post">
                             <div class="total_area"> 
-                                <h2 class="title text-center">Finalizando Locação</h2>
-                                    <div class="form-inline" style="padding-top: 50px;">
-                                        <div class="form-group"  style=" padding-left: 20px;">    
-                                            Locação
-                                            <input type="date" name="dataInicial">
-
-                                        </div>
-                                        <div class="form-group"style="padding-left: 15px;">                     
-                                            Devolução
-                                            <input type="date" name="dataFinal" >
-                                        </div>                
-                                    </div>
+                                <h2 class="title text-center">Finalizando Compra</h2>
+                                    
                                 <div class="form-inline"style="padding-top: 20px;  padding-left: 20px;" >                        
                                     <div class="form-group">
                                         Forma de Pagamento  
@@ -296,7 +281,7 @@
                                         </div>
                                         
                                         <div class="form-group">
-                                            <a class="btn btn-default update" href="ControleCarrinho?acao=cancelaCompra">Cancelar Locação</a>
+                                            <a class="btn btn-default update" href="ControleCarrinho?acao=cancelaCompra">Cancelar Compra</a>
                                             <input class="btn btn-default update" type="submit" name="acao" value="Finalizar Pedido">
                                         </div>
                                     </div>                           
@@ -307,13 +292,13 @@
                 </div>
             </div>
 	</section> 
-        <!--
-            OPÇÕES FIM
-	-->
+    <!--
+        OPÇÕES FIM
+    -->
         
-	<!--	
-	 RODAPÉ	
-	-->	
+    <!--	
+     RODAPÉ	
+    -->	
             <footer id="footer">		
                 <div class="footer-widget">
                     <div class="container">
@@ -337,9 +322,9 @@
                 </div>
 
             </footer>	
-	<!--	
-	 RODAPÉ FIM	
-	-->
+    <!--	
+     RODAPÉ FIM	
+    -->
 	
 	
 	

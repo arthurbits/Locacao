@@ -16,7 +16,7 @@ public class BllCarrinho {
     }    
     
     
-    public void FinalizarLocacao(CarrinhoDeCompra carrinho , Usuario usuario, Endereco endereco){          
+    public void FinalizarCompra(CarrinhoDeCompra carrinho , Usuario usuario, Endereco endereco){          
         if (carrinho.getItens()==null | carrinho.getItens().size()==0){                  
                 pagina= "carrinhoVazio.jsp";
             }else if(usuario == null){              
@@ -24,7 +24,7 @@ public class BllCarrinho {
             }else if ( endereco==null | endereco.getIdEndereco() == 0 ){                    
                 pagina="ControleCliente?acao=ChecarCliente";
             }else{
-                pagina="finalizarLocacao.jsp";
+                pagina="finalizarCompra.jsp";
             }
     }
 

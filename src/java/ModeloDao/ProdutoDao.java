@@ -34,11 +34,8 @@ public class ProdutoDao {
             novoProduto.setIdProduto(rs.getInt("idProduto"));                        
             novoProduto.setNome(rs.getString("nome"));
             novoProduto.setValorCompra(rs.getDouble("valorCompra"));
-            novoProduto.setValorLocacao(rs.getDouble("valorLocacao"));
-            novoProduto.setValorDano(rs.getDouble("valorDano"));
-            novoProduto.setImagem(rs.getString("imagem"));
-            novoProduto.setLocado(rs.getBoolean("locado"));
-            novoProduto.setReservado(rs.getBoolean("reservado"));         
+            novoProduto.setValorVenda(rs.getDouble("valorVenda"));
+            novoProduto.setImagem(rs.getString("imagem"));                
             listaProduto.add(novoProduto);           
        }
        return listaProduto;
@@ -48,10 +45,8 @@ public class ProdutoDao {
         //conexão
         Connection conexao = null;
         //Instancia de Array
-        Produto produto = new Produto();
-        
-        try{
-            
+        Produto produto = new Produto();        
+        try{            
             conexao = Conexao.getConexao();
             PreparedStatement pstmt = conexao.prepareStatement(BUSCARPORID);
             pstmt.setInt(1,idProduto);
@@ -61,11 +56,9 @@ public class ProdutoDao {
             produto.setIdProduto(rs.getInt("idProduto"));                        
             produto.setNome(rs.getString("nome"));
             produto.setValorCompra(rs.getDouble("valorCompra"));
-            produto.setValorLocacao(rs.getDouble("valorLocacao"));
-            produto.setValorDano(rs.getDouble("valorDano"));
+            produto.setValorVenda(rs.getDouble("valorVenda"));
             produto.setImagem(rs.getString("imagem"));
-            produto.setLocado(rs.getBoolean("locado"));
-            produto.setReservado(rs.getBoolean("reservado"));      
+            produto.setDescricao(rs.getString("descricao"));
                      
         }
        return produto;

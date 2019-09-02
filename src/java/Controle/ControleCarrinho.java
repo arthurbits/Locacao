@@ -4,7 +4,9 @@ package Controle;
 import Bll.BllCarrinho;
 import Modelo.CarrinhoDeCompra;
 import Modelo.Endereco;
+import Modelo.Produto;
 import Modelo.Usuario;
+import ModeloDao.ProdutoDao;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,13 +36,22 @@ public class ControleCarrinho extends HttpServlet {
             BllCarrinho bll = new BllCarrinho();
             Usuario usuario = (Usuario) sessao.getAttribute("usuario");
             Endereco endereco = (Endereco) sessao.getAttribute("endereco");
+            ProdutoDao pdao = new ProdutoDao();
             
-            if(acao.equals("FinalizaLocacao")){ 
-                bll.FinalizarLocacao(carrinho, usuario, endereco);
+            if(acao.equals("detalhesProduto")){
+                int idProduto = Integer.parseInt(request.getParameter("idProduto"));
+                Produto produto = pdao.listarPorId(idProduto);
+                System.out.println(produto.getDescricao());
+                sessao.setAttribute("produto", produto);
+                response.sendRedirect("infoProduto.jsp");
+            }
+            
+            if(acao.equals("finalizaCompra")){ 
+                bll.FinalizarCompra(carrinho, usuario, endereco);
                 response.sendRedirect( bll.getPagina());                
             }    
             
-            if(acao.equals("VerificaCarrinho")){
+            if(acao.equals("verificaCarrinho")){
                 bll.VerrificarCarrinho(carrinho);
                 response.sendRedirect(bll.getPagina());
             }
