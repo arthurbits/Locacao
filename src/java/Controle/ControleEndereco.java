@@ -49,7 +49,7 @@ public class ControleEndereco extends HttpServlet {
                 Usuario usuario = (Usuario) session.getAttribute("usuario");              
                 Endereco endereco = edao.localizarPorUsuario(usuario);
                 session.setAttribute("endereco", endereco);                
-                response.sendRedirect("lobby.jsp");                
+                response.sendRedirect("dadosPessoais.jsp");                
             }
             
             

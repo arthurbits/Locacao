@@ -18,7 +18,6 @@ public class ItemDeCompraDao {
     private static final String CADASTRARITEM = "insert into itemdecompra (idproduto,quantidade,total,idcomprafk) values (?,?,?,?)";
     private static final String LOCALIZARCARRINHO = "select * from itemdecompra where idcomprafk = ? ";  
     private static final String ATUALIZAR = "update compra set quantidade=?,total=? where iditemdecompra=? ";
-    private static final String DATADISPONIVEL = " select l.idlocacao , l.datainicial , l.datafinal , i.iditemdecompra , i.idproduto from locacao as l , itemdecompra as i where i.idlocacaofk = l.idlocacao and ? between l.datainicial and l.datafinal and i.idproduto = ? ";
     
 
     

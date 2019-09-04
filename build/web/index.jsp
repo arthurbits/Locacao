@@ -90,28 +90,22 @@
                                        
                                     <div class="form-group">
                                         <h6><%=msg%> &nbsp &nbsp </h6>
-                                    </div>
-                                    
-                                    
-
-                                    <div class="form-group">
+                                    </div>                      
+                                     <div class="form-group">
                                         <div class="shop-menu clearfix pull-right">
-                                            <a href="ControleCliente?acao=ChecarCliente"  class="fa fa-home">Sua Conta</a>
+                                            <a href="lobby.jsp"  class="fa fa-home">Sua Conta</a>
                                         </div>
                                     </div>
-
                                     <div class="form-group">                                      
                                         <div class="shop-menu clearfix pull-right">                                          
                                             <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
                                         </div>                                       
-                                    </div> 
-                                    
+                                    </div>                                     
                                     <div class="form-group">                                      
                                         <div class="shop-menu clearfix pull-right">                                          
                                             <a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a>
                                         </div>                                       
                                     </div> 
-
                                 </div>                                                
                             <% } %>                    
                     </div>

@@ -120,7 +120,7 @@
                         <thead>
                             <tr class="cart_menu">
                                 <td class="image">Item</td>
-                                <td class="description"></td>
+                                <td class="description">Nome</td>
                                 <td class="price">Preço</td>
                                 <td class="quantity">Quantidade</td>
                                 <td class="total">Total</td>
@@ -134,7 +134,7 @@
                         <tbody>
                         <tr>
                             <td class="cart_product">
-                                <a href=""><img src="imagens/<%=item.getProduto().getImagem()%>" alt="<%=item.getProduto().getImagem()%>" width="100px" height="100px" ></a>
+                                <a href="ControleCarrinho?acao=detalhesProduto&idProduto=<%=item.getProduto().getIdProduto()%>"><img src="imagens/<%=item.getProduto().getImagem()%>" alt="<%=item.getProduto().getImagem()%>" width="100px" height="100px" ></a>
                             </td>
                             <td class="cart_description">
                                 <h4><%=item.getProduto().getNome() %></h4>                                

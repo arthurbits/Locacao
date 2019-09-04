@@ -49,10 +49,6 @@
 </head><!--/head-->
 
 <body>
-        
-       <div class="shop-menu clearfix pull-right">
-            <a href="ControleCliente?acao=ChecarCliente"  class="fa fa-home"> Teste Comando </a>
-        </div>
     
     
     <!--
@@ -150,7 +146,7 @@
 
         
        
-	<section>
+	
         <div class="container">
             <div class="row">
                 <!--
@@ -158,32 +154,26 @@
                 -->
                 
                 <div class="col-sm-3">
-                    <div class="left-sidebar">
-                            
+                    <div class="left-sidebar">                           
+                        <h2>Acesso</h2>
+                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
 
-                                <h2>Acesso</h2>
-                                <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                                <h4 class="panel-title"><a href="alterarSenha.jsp">Alterar Senha</a></h4>
-                                        </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                            <h4 class="panel-title"><a href="alterarSenha.jsp">Alterar Senha</a></h4>
                                     </div>
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                                <h4 class="panel-title"><a href="index.jsp">Continuar as Compras</a></h4>
-                                        </div>
-                                    </div>							
-                                    
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title"><a href="ControleCliente?acao=ChecarCliente" > Sua Conta </a></h4>
-                                        </div>
-                                    </div>
-
                                 </div>
-
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                            <h4 class="panel-title"><a href="ControleCliente?acao=ChecarCliente"> Dados Pessoais </a></h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                            <h4 class="panel-title"><a href="index.jsp">Continuar as Compras</a></h4>
+                                    </div>
+                                </div>					
+                          </div>
                     </div>
                 </div>
                 
@@ -193,247 +183,95 @@
 
                     
 
-                    <div class="col-sm-9 padding-right" id="DadosPessoaisEEndereco"> 
+    <div class="col-sm-5 padding-right" > 
 
-                    <!--
-                        Dados Pessoais 	
-                    -->
-                    <div class="col-sm-9 padding-right">
-                        <%
-                            if(clienteMsg == null){ clienteMsg=" ";}
-                            if(cliente == null| cliente.getIdCliente() == 0 | cliente.getNome() == null){
-                        %>
-                        <div id="dadosClienteVazio">                            
-                            <form method="post" action="ControleCliente" >
-                                <h2> Dados Pessoais</h2>                               
-                            </form>                            
-                            
-                            <form method="post" action="ControleCliente" >
-                                                                  
-                                <div class="form-group col-md-12">
-                                  <label >Nome</label>
-                                  <input type="text" class="form-control"  placeholder="Nome" name="nome" required="required">
-                                </div>                                  
-                                                               
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                      <label >RG</label>
-                                      <input type="number" class="form-control"  placeholder="Digite apenas números" name="rg" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >CPF</label>
-                                      <input type="number" class="form-control"  placeholder="Digite apenas números" name="cpf" required="required">
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                      <label >Telefone</label>
-                                      <input type="number" class="form-control"  placeholder="Digite apenas números" name="telefone" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >Celular</label>
-                                      <input type="number" class="form-control"  placeholder="Digite apenas números" name="celular" required="required">
-                                    </div>
-                                    
-                                </div>                               
-                                <div class="form-group  col-md-6">                          
-                                   
-                                    <input type="submit" name="acao"  class="btn btn-primary" id="CadastroCliente" value="Cadastrar" >
-                                    
-                                </div>
-                                
-                                <h6><%=clienteMsg%></h6>
-                                
-                            </form>
-                        </div>            
-                        <%  
-                            }else{
-                        %>
-                        <div id="dadosClienteExistente">                            
-                            <form method="post" action="ControleCliente" >
-                                <h2> Dados Pessoais</h2>                               
-                            </form>                            
-                            
-                            <form method="post" action="ControleCliente" >
-                                                                  
-                                <div class="form-group col-md-12">
-                                  <label >Nome</label>
-                                  <input type="text" class="form-control"  value="<%=cliente.getNome()%>" name="nome" required="required">
-                                </div>                                  
-                                                               
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                      <label >RG</label>
-                                      <input type="text" class="form-control"  value="<%=cliente.getRg()%>" name="rg" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >CPF</label>
-                                      <input type="text" class="form-control"  value="<%= cliente.getCpf() %>" name="cpf" required="required">
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                      <label >Telefone</label>
-                                      <input type="text" class="form-control"  value="<%= cliente.getTelefone() %>" name="telefone" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >Celular</label>
-                                      <input type="text" class="form-control"  value="<%= cliente.getCelular() %>" name="celular" required="required">
-                                    </div>
-                                    
-                                </div>                               
-                                <div class="form-group  col-md-6">                          
-                                   
-                                    <input type="submit" name="acao"  class="btn btn-primary" value="Salvar">
-                                    
-                                </div>
-                                
-                                <h6><%=clienteMsg%></h6>
-                            </form>
-                        </div>
-                        
-                    </div>
-                    <!--							
-                        Dados Pessoais 	FIM
-                    -->            
-                    
-                    <!--			
-                        Endereço
-                    -->
-                    <div class="col-sm-9 padding-right">       
-                        <%
-                            if(enderecoMsg == null){ enderecoMsg=" ";}
-                            if(endereco == null | endereco.getIdEndereco() == 0 | endereco.getLogradouro() == null){    
-                        %>    
-                        <div id="dadosEnderecoVazio">
-                            
-                            <form method="post" action="ControleEndereco">
-                                </br></br>
-                                <h2> Dados Endereço</h2>                               
-                            </form> 
-                            
-                            <form method="post" action="ControleEndereco" >
-                                                                  
-                                <div class="form-group col-md-12">
-                                  <label >Rua/Avenida/Viela </label>
-                                  <input type="text" class="form-control"  placeholder="Rua" name="logradouro" required="required">
-                                </div>                                  
-                                                               
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                      <label >Número</label>
-                                      <input type="number" class="form-control"  placeholder="nº" name="numero" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >CEP</label>
-                                      <input type="number" class="form-control"  placeholder="CEP" name="cep" required="required">
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                      <label >Bairro</label>
-                                      <input type="text" class="form-control"  placeholder="Bairro"  name="bairro" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >Cidade</label>
-                                      <input type="text" class="form-control"  placeholder="Cidade" name="cidade" required="required">
-                                    </div>
-                                    
-                                </div>                               
-                                <div class="form-group  col-md-6">                          
-                                   
-                                    <input type="submit" name="acao"  class="btn btn-primary" id="CadastroEndereco" value="Cadastrar">
-                                    
-                                </div>
-                                
-                                <h6><%=enderecoMsg%></h6>
-                                
-                            </form>
-                        </div>
-                        <%
-                            }else{
-                        %>    
-                        <div id="dadosEnderecoExistente">
-                            
-                            <form method="post" action="ControleEndereco">
-                                </br></br>
-                                <h2> Dados Endereço</h2>                               
-                            </form> 
-                            <form method="post" action="ControleEndereco" >
-                                                                  
-                                <div class="form-group col-md-12">
-                                  <label >Rua/Avenida/Viela </label>
-                                  <input type="text" class="form-control"  value="<%= endereco.getLogradouro() %>" name="logradouro" required="required">
-                                </div>                                  
-                                                               
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                      <label >Número</label>
-                                      <input type="text" class="form-control"  value="<%= endereco.getNumero() %>" name="numero" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >CEP</label>
-                                      <input type="text" class="form-control"  value="<%= endereco.getCep() %>" name="cep" required="required">
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group  col-md-6">
-                                        <label >Bairro</label>
-                                      <input type="text" class="form-control" value="<%= endereco.getBairro() %>"  name="bairro" required="required">
-                                    </div>
-
-
-                                    <div class="form-group  col-md-6">
-                                      <label >Cidade</label>
-                                      <input type="text" class="form-control"  value="<%= endereco.getCidade() %>" name="cidade" required="required">
-                                    </div>
-                                    
-                                </div>                               
-                                <div class="form-group  col-md-6">                          
-                                   
-                                    <input type="submit" name="acao"  class="btn btn-primary" value="Salvar" >
-                                    
-                                </div>
-                                
-                                <h6><%=enderecoMsg%></h6>
-                                
-                            </form>
-                        </div>
-                        
-                        <%
-                            }}
-                        %>
-                    </div>
-                    <!--							
-                        Endereço 	FIM
-                    -->            
-                                
-                    </div>            
+    <!--
+        CLIENTE
+    -->
+             
+            <div class="container">				
+                <div class="step-one">
+                        <h2 class="heading">Informações Pessoais</h2>
+                </div>	
             </div>
+             <div class="container">
+                <div class="row">
+                    <div class="col-md-6">                         
+                    <p><label>Nome     : </label> <%= cliente.getNome() %> </p>
+                    <p><label>RG       : </label><%= cliente.getRg() %></p>
+                    <p><label>CPF      : </label><%= cliente.getCpf() %></p>
+                    <p><label>Telefone : </label><%= cliente.getTelefone() %></p>
+                    <p><label>Celular  : </label> <%= cliente.getCelular()%></p>
+                    </div>
+                    
+                    <div class="col-md-6">                    
+                    <p><label>Logradouro : </label> <%= endereco.getLogradouro() %> </p>
+                    <p><label>Número     : </label> <%= endereco.getNumero() %> </p>
+                    <p><label>Bairro     : </label> <%= endereco.getBairro() %> </p>
+                    <p><label>Cidade     : </label> <%= endereco.getCidade() %> </p>
+                    <p><label>CEP        : </label> <%= endereco.getCep() %> </p>
+                    </div>
+                </div>           
+            </div>			
+       
+    <!--
+        CLIENTE OFF
+    -->        
+    <!--				
+        COMPRAS
+    -->        
+       <section id="cart_items">
+        <div class="review-payment">
+                <h2>Compras Realizadas</h2>
+        </div> 
+        <div class="container">
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">        <!-- SE REPETE A CADA CARRINHO -->               
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="image"><label>Data e Hora : </label> 03/09/2019  11:28:30</td>
+                                <td class="description"><label>Valor : </label>R$ 1500,00</td>
+                                <td class="price"><label>Forma de Pagamento  : </label> Cartão de Crédito</td>                               
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>                     
+                        <tbody>
+                        <tr>                                                                        <!-- SE REPETE A CADA ITEM -->
+                            <td class="cart_product">                                   <!-- IMAGEM  e Botao para o item -->
+                                <a href=""><img src="imagens/campoFutebol.jpg" alt="campoFutebol.jpg" width="50px" height="50px" ></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4>Campo de Futebol </h4>                              <!-- NOME -->               
+                            </td>
+                            <td class="cart_description">
+                                 <h4>R$ 750.0</h4>                                                  <!-- VALOR UNITÁRIO -->
+                            </td>
+                            <td class="cart_description">
+                                 <h4> 2 </h4>                                                               <!-- QUANTIDADE -->
+                            </td>
+                            <td class="cart_description">
+                                <h4>R$ 1500.0 </h4>                                                 <!-- TOTAL -->
+                            </td>                            
+                        </tr>
+                        
+                        </tbody>                     
+                    </table>
+                   
+                    
+                    
+                    
+                    
+                </div>
+            </div>        
+       </div>   
+       
         </div>
-	</section>
+    <!--				
+        COMPRAS FIM				
+    -->       
+                   
                             
         </br></br></br></br></br></br></br>
 	<!--
@@ -441,23 +279,17 @@
 	 RODAPÉ
 	
 	-->
-	
-	
-	
 	<footer id="footer">
-		
-		
-		<div class="footer-widget">
-			<div class="container">
-				
-					<div class="col-md12">
-						<div class="single-widget">
-							<h2>Service</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><h6>Online Help</h6></li>
-								<li><h6>Contact Us</h6></li>							
-						</div>
-					</div>
+                        <div class="footer-widget">
+                            <div class="container">
+                                <div class="col-md12">
+                                        <div class="single-widget">
+                                                <h2>Service</h2>
+                                                <ul class="nav nav-pills nav-stacked">
+                                                <li><h6>Online Help</h6></li>
+                                                <li><h6>Contact Us</h6></li>							
+                                        </div>
+                                </div>
 					
 			
 			</div>

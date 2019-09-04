@@ -115,7 +115,9 @@ public class ClienteDao {
         //Instancia de Array
         Cliente novoCliente = new Cliente(); 
         Endereco endereco = new Endereco();
+        EnderecoDao edao = new EnderecoDao();
         Usuario usuario = new Usuario();
+        UsuarioDao udao = new UsuarioDao();
         try{            
             conexao = Conexao.getConexao();
             PreparedStatement pstmt = conexao.prepareStatement(BUSCARPORID);
@@ -129,8 +131,10 @@ public class ClienteDao {
             novoCliente.setCpf(rs.getString("cpf"));
             novoCliente.setTelefone(rs.getString("telefone"));
             novoCliente.setCelular(rs.getString("celular"));
-            usuario.setIdUsuario(rs.getInt("idusuariofk"));
-            endereco.setIdEndereco(rs.getInt("idenderecofk"));
+            int idusuario = rs.getInt("idusuariofk");
+            int idendereco = rs.getInt("idenderecofk");
+            usuario = udao.buscarPorId(idusuario);
+            endereco = edao.localizarPorUsuario(usuario);
             novoCliente.setUsuario(usuario);
             novoCliente.setEndereco(endereco);
         }

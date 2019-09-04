@@ -208,7 +208,7 @@
                         <tbody>
                         <tr>
                             <td class="cart_product">
-                                <a href=""><img src="imagens/<%=item.getProduto().getImagem()%>" alt="<%=item.getProduto().getImagem()%>"></a>
+                                <a href="ControleCarrinho?acao=detalhesProduto&idProduto=<%=item.getProduto().getIdProduto()%>"><img src="imagens/<%=item.getProduto().getImagem()%>" alt="<%=item.getProduto().getImagem()%>"></a>
                             </td>
                             <td class="cart_description">
                                 <h4><%=item.getProduto().getNome() %></h4>                                
@@ -241,7 +241,7 @@
        </div>   
        </section>	
     <!--				
-        CARRINHO				
+        CARRINHO FIM				
     -->
 			
     <!--    
@@ -281,8 +281,8 @@
                                         </div>
                                         
                                         <div class="form-group">
-                                            <a class="btn btn-default update" href="ControleCarrinho?acao=cancelaCompra">Cancelar Compra</a>
-                                            <input class="btn btn-default update" type="submit" name="acao" value="Finalizar Pedido">
+                                            <a class="btn btn-default update" href="ControleCarrinho?acao=cancelaCompra" style=" width: 200px; height: 50px; font-size: 15pt;" >Cancelar Compra</a>
+                                            <input class="btn btn-default update" type="submit" name="acao" value="Finalizar Pedido" style=" width: 200px; height: 50px; font-size: 15pt;">
                                         </div>
                                     </div>                           
                             </div>

@@ -18,7 +18,7 @@ public class UsuarioDao {
     private static final String LOGIN = "select * from usuario where usuario=? and senha=?";
     public static final String VALIDA = "update usuario set ativo=? where email = ? "; 
     public static final String BUSCAPOREMAIL = "select * from usuario where email=?"; 
-  
+    public static final String BUSCAPORID = "select * from usuario where idusuario=?"; 
     
     public void ativarUsuario (String email){
        Connection conexao = null;
@@ -214,7 +214,34 @@ public class UsuarioDao {
        }
     }     
     
-
+    public Usuario buscarPorId (int idUsuario)throws SQLException, ClassNotFoundException {
+        Connection conexao = null;
+        Usuario usuarioLogado = new Usuario();        
+        try{            
+            conexao = Conexao.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(BUSCAPORID);
+            pstmt.setInt(1,idUsuario);
+            ResultSet rs = pstmt.executeQuery();
+        while (rs.next()){        //a cada loop                     
+            usuarioLogado.setIdUsuario(rs.getInt("idUsuario"));
+            usuarioLogado.setUsuario(rs.getString("usuario"));
+            usuarioLogado.setSenha(rs.getString("senha"));
+            usuarioLogado.setEmail(rs.getString("email"));            
+            usuarioLogado.setAtivo(rs.getBoolean("ativo"));  
+            usuarioLogado.setCredencial(rs.getString("credencial"));                  
+        }
+            return usuarioLogado;            
+        }catch(Exception e ){
+            throw new RuntimeException(e);
+        }finally{
+            try{
+                conexao.close();
+            }catch (SQLException ex){
+                    throw new RuntimeException(ex);
+            
+                }            
+            } 
+    }
     
     
     
