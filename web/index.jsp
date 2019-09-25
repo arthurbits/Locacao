@@ -49,6 +49,10 @@
         String msg = (String) session.getAttribute("msg");                            
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if(msg == null){ msg=" Bem vindo ";}
+         ArrayList<Produto> produtos = (ArrayList<Produto>) session.getAttribute("produtos");
+        if(produtos == null) {
+            request.getRequestDispatcher("/ControleProduto?acao=listaProdutos").forward(request, response);
+        }
     %>
     <!--
             Barra Superior Login
@@ -79,7 +83,7 @@
                                         <ul class="nav navbar-nav">	
                                             <li><h6><%=msg%></h6></li>                                          
                                             <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
-                                            <li><a href="sair.jsp" class="fa fa-power-off"> Sair </a><li>
+                                            <li><a href="ControleUsuario?acao=sair" class="fa fa-power-off"> Sair </a><li>
                                             <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li> 
                                         </ul>                                    
                                     </div>                                      
@@ -98,7 +102,7 @@
                                     </div>
                                     <div class="form-group">                                      
                                         <div class="shop-menu clearfix pull-right">                                          
-                                            <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
+                                            <a href="ControleUsuario?acao=sair" class="fa fa-power-off" > Sair </a>
                                         </div>                                       
                                     </div>                                     
                                     <div class="form-group">                                      
@@ -136,7 +140,65 @@
     <!--        
         Barra Superior Login / FIM       
     --> 
-        
+    <!--				
+                    TOP 6
+    -->
+    <div class="recommended_items"><!--recommended_items-->
+            <h2 class="title text-center">recommended items</h2>
+
+            <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                            <div class="item active">
+                                <%
+                                    for (int i = 0 ; i<=2;i++){
+                                        Produto p = produtos.get(i);                                    
+                                %>
+                                    <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                            <div class="productinfo text-center">
+                                                                <img src="imagens/<%= p.getImagem()%>" width="200px" height="300px" alt="<%= p.getImagem()%>" />
+                                                                    <h2>R$ <%=p.getValorVenda()%></h2>
+                                                                    <p><%= p.getNome() %></p>
+                                                                    <a href="ControleCarrinho?acao=detalhesProduto&idProduto=<%=p.getIdProduto()%>"  class="btn btn-default add-to-cart " <i class="fa-shopping-bag"> Detalhes do Produto </a>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                    </div> 
+                                    <% } %>
+                            </div>
+                            <div class="item ">	
+                                <%
+                                    for (int i = 3 ; i<=5;i++){
+                                        Produto p = produtos.get(i);                                    
+                                %>
+                                     <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                            <div class="productinfo text-center">
+                                                                <img src="imagens/<%= p.getImagem()%>" width="200px" height="300px" alt="<%= p.getImagem()%>" />
+                                                                    <h2>R$ <%=p.getValorVenda()%></h2>
+                                                                    <p><%= p.getNome() %></p>
+                                                                   <a href="ControleCarrinho?acao=detalhesProduto&idProduto=<%=p.getIdProduto()%>"  class="btn btn-default add-to-cart " <i class="fa-shopping-bag"> Detalhes do Produto </a>                                   
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                    </div> 
+                            <% } %>                                  
+                            </div>
+                    </div>
+                     <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                      </a>
+                      <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                      </a>			
+            </div>
+    </div>
+
+    <!--
+          TOP 6 FIM
+    -->    
         <section>
         <div class="container">
             <div class="row">
@@ -162,13 +224,7 @@
         <!--	
                 PRODUTOS
         -->
-                        <%
-                            // Recupera os produtos.
-                            ArrayList<Produto> produtos = (ArrayList<Produto>) request.getAttribute("produtos");
-                            if(produtos == null) {
-                                request.getRequestDispatcher("/ControleProduto?acao=listaProdutos").forward(request, response);
-                            }
-                        %>
+                        
                         <div class="features_items"><!--features_items-->
                                 <h2 class="title text-center"></h2>
                                 <%                                      

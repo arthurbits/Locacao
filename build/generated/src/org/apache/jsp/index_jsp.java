@@ -105,6 +105,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
         String msg = (String) session.getAttribute("msg");                            
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if(msg == null){ msg=" Bem vindo ";}
+         ArrayList<Produto> produtos = (ArrayList<Produto>) session.getAttribute("produtos");
+        if(produtos == null) {
+            request.getRequestDispatcher("/ControleProduto?acao=listaProdutos").forward(request, response);
+        }
     
       out.write("\n");
       out.write("    <!--\n");
@@ -207,7 +211,70 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <!--        \n");
       out.write("        Barra Superior Login / FIM       \n");
       out.write("    --> \n");
-      out.write("        \n");
+      out.write("    <!--\t\t\t\t\n");
+      out.write("                    TOP 6\n");
+      out.write("    -->\n");
+      out.write("    <div class=\"recommended_items\"><!--recommended_items-->\n");
+      out.write("            <h2 class=\"title text-center\">recommended items</h2>\n");
+      out.write("\n");
+      out.write("            <div id=\"recommended-item-carousel\" class=\"carousel slide\" data-ride=\"carousel\">\n");
+      out.write("                    <div class=\"carousel-inner\">\n");
+      out.write("                            <div class=\"item active\">\n");
+      out.write("                                ");
+
+                                    for (int i = 0 ; i<=2;i++){
+                                        Produto p = produtos.get(i);                                    
+                                
+      out.write("\n");
+      out.write("                                    <div class=\"col-sm-4\">\n");
+      out.write("                                            <div class=\"product-image-wrapper\">\n");
+      out.write("                                                    <div class=\"single-products\">\n");
+      out.write("                                                            <div class=\"productinfo text-center\">\n");
+      out.write("                                                                <img src=\"images/");
+      out.print( p.getImagem());
+      out.write("\" alt=\"\" />\n");
+      out.write("                                                                    <h2>R$ ");
+      out.print(p.getValorVenda());
+      out.write("</h2>\n");
+      out.write("                                                                    <p>");
+      out.print( p.getNome() );
+      out.write("</p>\n");
+      out.write("                                                                    <a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Add to cart</a>\n");
+      out.write("                                                            </div>\n");
+      out.write("                                                    </div>\n");
+      out.write("                                            </div>\n");
+      out.write("                                    </div> \n");
+      out.write("                                    ");
+ } 
+      out.write("\n");
+      out.write("                            </div>\n");
+      out.write("                            <div class=\"item \">\t\n");
+      out.write("                                    <div class=\"col-sm-4\">\n");
+      out.write("                                            <div class=\"product-image-wrapper\">\n");
+      out.write("                                                    <div class=\"single-products\">\n");
+      out.write("                                                            <div class=\"productinfo text-center\">\n");
+      out.write("                                                                    <img src=\"images/home/recommend1.jpg\" alt=\"\" />\n");
+      out.write("                                                                    <h2>$56</h2>\n");
+      out.write("                                                                    <p>Easy Polo Black Edition</p>\n");
+      out.write("                                                                    <a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Add to cart</a>\n");
+      out.write("                                                            </div>\n");
+      out.write("                                                    </div>\n");
+      out.write("                                            </div>\n");
+      out.write("                                    </div>                                    \n");
+      out.write("                            </div>\n");
+      out.write("                    </div>\n");
+      out.write("                     <a class=\"left recommended-item-control\" href=\"#recommended-item-carousel\" data-slide=\"prev\">\n");
+      out.write("                            <i class=\"fa fa-angle-left\"></i>\n");
+      out.write("                      </a>\n");
+      out.write("                      <a class=\"right recommended-item-control\" href=\"#recommended-item-carousel\" data-slide=\"next\">\n");
+      out.write("                            <i class=\"fa fa-angle-right\"></i>\n");
+      out.write("                      </a>\t\t\t\n");
+      out.write("            </div>\n");
+      out.write("    </div>\n");
+      out.write("\n");
+      out.write("    <!--\n");
+      out.write("          TOP 6 FIM\n");
+      out.write("    -->    \n");
       out.write("        <section>\n");
       out.write("        <div class=\"container\">\n");
       out.write("            <div class=\"row\">\n");
@@ -233,15 +300,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!--\t\n");
       out.write("                PRODUTOS\n");
       out.write("        -->\n");
-      out.write("                        ");
-
-                            // Recupera os produtos.
-                            ArrayList<Produto> produtos = (ArrayList<Produto>) request.getAttribute("produtos");
-                            if(produtos == null) {
-                                request.getRequestDispatcher("/ControleProduto?acao=listaProdutos").forward(request, response);
-                            }
-                        
-      out.write("\n");
+      out.write("                        \n");
       out.write("                        <div class=\"features_items\"><!--features_items-->\n");
       out.write("                                <h2 class=\"title text-center\"></h2>\n");
       out.write("                                ");

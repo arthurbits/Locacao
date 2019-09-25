@@ -26,6 +26,7 @@ public class ControleUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
+        HttpSession session = request.getSession();
         UsuarioDao udao = new UsuarioDao(); 
         try {
            if(acao.equals("emailAtivacao")){
@@ -34,7 +35,10 @@ public class ControleUsuario extends HttpServlet {
                 udao.ativarUsuario(email);
                 response.sendRedirect("index.jsp");
             } 
-           
+           if(acao.equals("sair")){
+               session.invalidate();
+               response.sendRedirect("index.jsp");
+           }
            
         }catch(Exception e){
             request.setAttribute("erro",e);

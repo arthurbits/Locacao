@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ControleProduto", urlPatterns = {"/ControleProduto"})
 public class ControleProduto extends HttpServlet {
@@ -21,13 +22,14 @@ public class ControleProduto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String acao = request.getParameter("acao");
+            HttpSession sessao = request.getSession();   
             if (acao.equals("listaProdutos")) {
                 //monta uma lista para exibição na pagina principal
                 ArrayList<Produto> produtos = new ProdutoDao().listar();
                 //armazena os produto na requisição
-                request.setAttribute("produtos", produtos);
+                sessao.setAttribute("produtos", produtos);
                 //envia para index.jsp
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                response.sendRedirect("index.jsp");
             }
             } catch (Exception erro) {
             request.setAttribute("erro", erro);
