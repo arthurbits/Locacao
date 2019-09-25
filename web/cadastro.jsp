@@ -81,7 +81,7 @@
                                             <li><h6><%=msg%></h6></li>                 
                                             <li><a href="cadastro.jsp"><i class="fa fa-lock"></i> Cadastre-se</a></li>
                                             <li><a href=""><i class="fa fa-envelope"></i> Reenviar E-mail de validação</a></li>   
-                                            <li><a href="sair.jsp" class="fa fa-power-off" > Sair </a></li>
+                                            <li><a href="ControleUsuario?acao=sair" class="fa fa-power-off" > Sair </a></li>
                                         </ul>                                    
                                     </div>                                      
                                 </form> 
@@ -111,7 +111,7 @@
                                       
                                         <div class="shop-menu clearfix pull-right">
                                           
-                                            <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
+                                            <a href="ControleUsuario?acao=sair" class="fa fa-power-off" > Sair </a>
                                         </div>
                                        
                                     </div> 

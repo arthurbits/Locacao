@@ -1,4 +1,4 @@
-<%@page import="Modelo.Endereco"%>
+e<%@page import="Modelo.Endereco"%>
 <%@page import="ModeloDao.EnderecoDao"%>
 <%@page import="Modelo.Cliente"%>
 <%@page import="ModeloDao.ClienteDao"%>
@@ -78,17 +78,16 @@
                                     </div>                                      
                                 </form>                   
                             <% }else if(usuario.getAtivo()==false){  %>
-                                <form action="ControleUsuario" class="form-inline"  method="post"  autocomplete="on">                                                   
+                                                                               
                                     <div class="shop-menu clearfix pull-right">
                                         <ul class="nav navbar-nav">	
                                             <li><h6><%=msg%></h6></li>                                          
-                                            <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
+                                            <li><a href="ControleUsuario?acao=Reenviar E-mail" class="btn btn-primary" >Reenviar E-mail</a>   
                                             <li><a href="ControleUsuario?acao=sair" class="fa fa-power-off"> Sair </a><li>
                                             <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li> 
                                         </ul>                                    
-                                    </div>                                      
-                                </form> 
-                            
+                                    </div>      
+                                                            
                             <% }else{  %>    
                                 <div class="form-inline" style="text-align:right ;">  
                                        
@@ -143,9 +142,9 @@
     <!--				
                     TOP 6
     -->
-    <div class="recommended_items"><!--recommended_items-->
-            <h2 class="title text-center">recommended items</h2>
-
+    <div class="col-md-8 " style=" margin-left: 280px;" >
+        <div class="recommended_items"><!--recommended_items-->        
+            <h2 class="title text-center">recommended items</h2>            
             <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                             <div class="item active">
@@ -193,6 +192,7 @@
                       <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
                             <i class="fa fa-angle-right"></i>
                       </a>			
+            </div>
             </div>
     </div>
 

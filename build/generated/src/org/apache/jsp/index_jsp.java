@@ -53,7 +53,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
+      out.write("e\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -141,19 +141,18 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            ");
  }else if(usuario.getAtivo()==false){  
       out.write("\n");
-      out.write("                                <form action=\"ControleUsuario\" class=\"form-inline\"  method=\"post\"  autocomplete=\"on\">                                                   \n");
+      out.write("                                                                               \n");
       out.write("                                    <div class=\"shop-menu clearfix pull-right\">\n");
       out.write("                                        <ul class=\"nav navbar-nav\">\t\n");
       out.write("                                            <li><h6>");
       out.print(msg);
       out.write("</h6></li>                                          \n");
-      out.write("                                            <li><input type=\"submit\" class=\"btn btn-primary\"  value=\"Reenviar E-mail de validação\"></li>   \n");
-      out.write("                                            <li><a href=\"sair.jsp\" class=\"fa fa-power-off\"> Sair </a><li>\n");
+      out.write("                                            <li><a href=\"ControleUsuario?acao=Reenviar E-mail\" class=\"btn btn-primary\" >Reenviar E-mail</a>   \n");
+      out.write("                                            <li><a href=\"ControleUsuario?acao=sair\" class=\"fa fa-power-off\"> Sair </a><li>\n");
       out.write("                                            <li><a href=\"ControleCarrinho?acao=verificaCarrinho\" class=\"btn btn-outline-success\" ><i class=\"fa fa-shopping-cart fa-1x\"></i>  Carrinho</a></li> \n");
       out.write("                                        </ul>                                    \n");
-      out.write("                                    </div>                                      \n");
-      out.write("                                </form> \n");
-      out.write("                            \n");
+      out.write("                                    </div>      \n");
+      out.write("                                                            \n");
       out.write("                            ");
  }else{  
       out.write("    \n");
@@ -171,7 +170,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"form-group\">                                      \n");
       out.write("                                        <div class=\"shop-menu clearfix pull-right\">                                          \n");
-      out.write("                                            <a href=\"sair.jsp\" class=\"fa fa-power-off\" > Sair </a>\n");
+      out.write("                                            <a href=\"ControleUsuario?acao=sair\" class=\"fa fa-power-off\" > Sair </a>\n");
       out.write("                                        </div>                                       \n");
       out.write("                                    </div>                                     \n");
       out.write("                                    <div class=\"form-group\">                                      \n");
@@ -214,9 +213,9 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <!--\t\t\t\t\n");
       out.write("                    TOP 6\n");
       out.write("    -->\n");
-      out.write("    <div class=\"recommended_items\"><!--recommended_items-->\n");
-      out.write("            <h2 class=\"title text-center\">recommended items</h2>\n");
-      out.write("\n");
+      out.write("    <div class=\"col-md-8 \" style=\" margin-left: 280px;\" >\n");
+      out.write("        <div class=\"recommended_items\"><!--recommended_items-->        \n");
+      out.write("            <h2 class=\"title text-center\">recommended items</h2>            \n");
       out.write("            <div id=\"recommended-item-carousel\" class=\"carousel slide\" data-ride=\"carousel\">\n");
       out.write("                    <div class=\"carousel-inner\">\n");
       out.write("                            <div class=\"item active\">\n");
@@ -230,16 +229,20 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                            <div class=\"product-image-wrapper\">\n");
       out.write("                                                    <div class=\"single-products\">\n");
       out.write("                                                            <div class=\"productinfo text-center\">\n");
-      out.write("                                                                <img src=\"images/");
+      out.write("                                                                <img src=\"imagens/");
       out.print( p.getImagem());
-      out.write("\" alt=\"\" />\n");
+      out.write("\" width=\"200px\" height=\"300px\" alt=\"");
+      out.print( p.getImagem());
+      out.write("\" />\n");
       out.write("                                                                    <h2>R$ ");
       out.print(p.getValorVenda());
       out.write("</h2>\n");
       out.write("                                                                    <p>");
       out.print( p.getNome() );
       out.write("</p>\n");
-      out.write("                                                                    <a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Add to cart</a>\n");
+      out.write("                                                                    <a href=\"ControleCarrinho?acao=detalhesProduto&idProduto=");
+      out.print(p.getIdProduto());
+      out.write("\"  class=\"btn btn-default add-to-cart \" <i class=\"fa-shopping-bag\"> Detalhes do Produto </a>\n");
       out.write("                                                            </div>\n");
       out.write("                                                    </div>\n");
       out.write("                                            </div>\n");
@@ -249,18 +252,37 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                            </div>\n");
       out.write("                            <div class=\"item \">\t\n");
-      out.write("                                    <div class=\"col-sm-4\">\n");
+      out.write("                                ");
+
+                                    for (int i = 3 ; i<=5;i++){
+                                        Produto p = produtos.get(i);                                    
+                                
+      out.write("\n");
+      out.write("                                     <div class=\"col-sm-4\">\n");
       out.write("                                            <div class=\"product-image-wrapper\">\n");
       out.write("                                                    <div class=\"single-products\">\n");
       out.write("                                                            <div class=\"productinfo text-center\">\n");
-      out.write("                                                                    <img src=\"images/home/recommend1.jpg\" alt=\"\" />\n");
-      out.write("                                                                    <h2>$56</h2>\n");
-      out.write("                                                                    <p>Easy Polo Black Edition</p>\n");
-      out.write("                                                                    <a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Add to cart</a>\n");
+      out.write("                                                                <img src=\"imagens/");
+      out.print( p.getImagem());
+      out.write("\" width=\"200px\" height=\"300px\" alt=\"");
+      out.print( p.getImagem());
+      out.write("\" />\n");
+      out.write("                                                                    <h2>R$ ");
+      out.print(p.getValorVenda());
+      out.write("</h2>\n");
+      out.write("                                                                    <p>");
+      out.print( p.getNome() );
+      out.write("</p>\n");
+      out.write("                                                                   <a href=\"ControleCarrinho?acao=detalhesProduto&idProduto=");
+      out.print(p.getIdProduto());
+      out.write("\"  class=\"btn btn-default add-to-cart \" <i class=\"fa-shopping-bag\"> Detalhes do Produto </a>                                   \n");
       out.write("                                                            </div>\n");
       out.write("                                                    </div>\n");
       out.write("                                            </div>\n");
-      out.write("                                    </div>                                    \n");
+      out.write("                                    </div> \n");
+      out.write("                            ");
+ } 
+      out.write("                                  \n");
       out.write("                            </div>\n");
       out.write("                    </div>\n");
       out.write("                     <a class=\"left recommended-item-control\" href=\"#recommended-item-carousel\" data-slide=\"prev\">\n");
@@ -269,6 +291,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                      <a class=\"right recommended-item-control\" href=\"#recommended-item-carousel\" data-slide=\"next\">\n");
       out.write("                            <i class=\"fa fa-angle-right\"></i>\n");
       out.write("                      </a>\t\t\t\n");
+      out.write("            </div>\n");
       out.write("            </div>\n");
       out.write("    </div>\n");
       out.write("\n");

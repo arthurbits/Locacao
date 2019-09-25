@@ -12,12 +12,10 @@
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             if(msg == null){ msg=" Bem vindo ";}
             
-            // Recupera os Dados do Cliente
-            String clienteMsg = (String) session.getAttribute("clienteMsg");                            
+            // Recupera os Dados do Cliente                                        
             Cliente cliente = (Cliente) session.getAttribute("cliente");
-            
-            // Recupera os Dados de Endereço
-            String enderecoMsg = (String) session.getAttribute("enderecoMsg");                            
+            if (cliente == null | cliente.getNome() == null){ response.sendRedirect("dadosPessoais.jsp"); }
+            // Recupera os Dados de Endereço                                       
             Endereco endereco = (Endereco) session.getAttribute("endereco");
             
             
@@ -80,7 +78,7 @@
                                         <ul class="nav navbar-nav">	
                                             <li><h6><%=msg%></h6></li>                                          
                                             <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
-                                            <li><a href="sair.jsp" class="fa fa-power-off"> Sair </a><li>
+                                            <li><a href="ControleUsuario?acao=sair" class="fa fa-power-off"> Sair </a><li>
                                             <li><a href="ControleCarrinho?acao=verificaCarrinho" class="btn btn-outline-success" ><i class="fa fa-shopping-cart fa-1x"></i>  Carrinho</a></li> 
                                         </ul>                                    
                                     </div>                                      
@@ -103,7 +101,7 @@
 
                                     <div class="form-group">                                      
                                         <div class="shop-menu clearfix pull-right">                                          
-                                            <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
+                                            <a href="ControleUsuario?acao=sair" class="fa fa-power-off" > Sair </a>
                                         </div>                                       
                                     </div> 
                                     

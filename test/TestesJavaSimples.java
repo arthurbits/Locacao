@@ -7,7 +7,6 @@ import Modelo.CarrinhoDeCompra;
 import Modelo.Cliente;
 import Modelo.Email;
 import Modelo.ItemDeCompra;
-import Modelo.Locacao;
 import Modelo.Produto;
 import Modelo.Tipo;
 import ModeloDao.UsuarioDao;

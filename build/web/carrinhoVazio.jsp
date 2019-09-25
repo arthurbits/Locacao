@@ -66,7 +66,7 @@
                                         <ul class="nav navbar-nav">	
                                             <li><h6><%=msg%></h6></li>                                          
                                             <li><input type="submit" class="btn btn-primary"  value="Reenviar E-mail de validação"></li>   
-                                            <li><a href="sair.jsp" class="fa fa-power-off"> Sair </a><li>
+                                            <li><a href="ControleUsuario?acao=sair" class="fa fa-power-off"> Sair </a><li>
                                         </ul>                                    
                                     </div>                                      
                                 </form> 
@@ -90,7 +90,7 @@
                                       
                                         <div class="shop-menu clearfix pull-right">
                                           
-                                            <a href="sair.jsp" class="fa fa-power-off" > Sair </a>
+                                            <a href="ControleUsuario?acao=sair" class="fa fa-power-off" > Sair </a>
                                         </div>
                                        
                                     </div> 

@@ -29,17 +29,25 @@ public class ControleUsuario extends HttpServlet {
         HttpSession session = request.getSession();
         UsuarioDao udao = new UsuarioDao(); 
         try {
-           if(acao.equals("emailAtivacao")){
-                System.out.println("Entrou em ativação sem ser get "); 
+           if(acao.equals("emailAtivacao")){                
                 String email = request.getParameter("emailCliente");
                 udao.ativarUsuario(email);
                 response.sendRedirect("index.jsp");
             } 
            if(acao.equals("sair")){
-               session.invalidate();
+               session.removeAttribute("usuario");
+               session.removeAttribute("msg");
                response.sendRedirect("index.jsp");
            }
-           
+            if (acao.equals("Reenviar E-mail")){            
+                Usuario usuario =(Usuario) session.getAttribute("usuario");
+                Email email = new Email();   
+                String emailtxt = usuario.getEmail();
+                email.enviaEmail(emailtxt);                  
+                String msg = "O email foi enviado com sucesso !";
+                session.setAttribute("msg", msg);
+                response.sendRedirect("index.jsp");              
+            }
         }catch(Exception e){
             request.setAttribute("erro",e);
             RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
@@ -95,45 +103,10 @@ public class ControleUsuario extends HttpServlet {
                 response.sendRedirect("cadastro.jsp"); 
             }
             
-            if (acao.equals("Reenviar E-mail")){            
-                Usuario usuario =(Usuario) session.getAttribute("usuario");
-                Email email = new Email();   
-                String emailtxt = usuario.getEmail();
-                email.enviaEmail(emailtxt);                  
-                String msg = "O email foi enviado com sucesso !";
-                session.setAttribute("msg", msg);
-                response.sendRedirect("index.jsp");              
-            }
+           
             
             if (acao.equals("Alterar Senha ")){
-                Usuario usuarioLogado =(Usuario)session.getAttribute("usuario");
-                String senhaAtual = request.getParameter("senhaAtual");
-                String senhaNova = request.getParameter("senhaNova");
-                String usuario = request.getParameter("usuario");
-                String senhaMsg = "";                 
-                /*
-                Usuario uChecando =udao.logar(usuario, senhaAtual);
-                if(uChecando != null){
-                    if (senhaAtual != senhaNova ){
-                        senhaMsg = "A senha foi alterada com sucesso ! ";
-                        usuarioLogado.setSenha(senhaNova);
-                        udao.alterarSenha(usuarioLogado);
-                    }else{
-                        senhaMsg = "As senhas devem ser diferentes ! ";
-                    }
-                    
-                    
-                }else{
-                   senhaMsg = "Usuario ou Senha Atual inválidos ! "; 
-                }
                 
-                
-                session.setAttribute("usuario", usuarioLogado);
-                session.setAttribute("senhaMsg", senhaMsg);
-                
-                
-                response.sendRedirect("alterarSenha.jsp");
-                */
             }
             
         }catch(Exception e){

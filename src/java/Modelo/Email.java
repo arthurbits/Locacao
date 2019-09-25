@@ -61,7 +61,7 @@ public class Email {
                     +"Seu cadastro no sistema do nosso site de locações Festa&Cia E-Shooper \n"+
                     " foi realizado com sucesso, mas para conclusão de \n"+
                     "seu cadastro será  necessario ativação da conta e para realiza-la\n"+
-                    " basta clicar neste link aqui :  http://localhost:8080/LocacaoVersao3.0/ControleUsuario?acao=emailAtivacao&emailCliente="+email);
+                    " basta clicar neste link aqui :  http://localhost:8080/eCommerce/ControleUsuario?acao=emailAtivacao&emailCliente="+email);
                   /**Método para enviar a mensagem criada*/             
                   
                   Transport.send(message);          
